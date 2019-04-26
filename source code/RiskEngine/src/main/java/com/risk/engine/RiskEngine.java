@@ -15,7 +15,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
-import com.engine.test.model.ModelResultHitItem;
+import com.engine.model.ModelResultHitItem;
 import com.ql.util.express.DefaultContext;
 import com.ql.util.express.ExpressRunner;
 import com.ql.util.express.IExpressContext;
@@ -25,8 +25,8 @@ import com.risk.engine.entity.Item;
 import com.risk.engine.entity.Next;
 import com.risk.engine.entity.Result;
 import com.risk.engine.entity.RiskModelTemplate;
-import com.engine.test.util.ExceptionUtils;
-import com.engine.test.util.MathUtils;
+import com.engine.util.ExceptionUtils;
+import com.engine.util.MathUtils;
 
 /**
  * 引擎执行入口

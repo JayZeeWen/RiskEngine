@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.engine.test.dao.ModelResultHitItemMapper" >
-  <resultMap id="BaseResultMap" type="com.engine.test.model.ModelResultHitItem" >
+<mapper namespace="com.engine.dao.ModelResultHitItemMapper" >
+  <resultMap id="BaseResultMap" type="com.engine.model.ModelResultHitItem" >
     <id column="id" property="id" jdbcType="VARCHAR" />
     <result column="result_id" property="resultId" jdbcType="VARCHAR" />
     <result column="mode_id" property="modeId" jdbcType="VARCHAR" />
@@ -80,7 +80,7 @@
     id, result_id, mode_id, hit_item_id, hit_item_desc, group_id, group_name, group_desc, 
     points, is_hit, create_date, update_date, refuse_reason, params, param_name
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.engine.test.model.ModelResultHitItemExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.engine.model.ModelResultHitItemExample" >
     select
     <if test="distinct" >
       distinct
@@ -104,13 +104,13 @@
     delete from model_result_hit_item
     where id = #{id,jdbcType=VARCHAR}
   </delete>
-  <delete id="deleteByExample" parameterType="com.engine.test.model.ModelResultHitItemExample" >
+  <delete id="deleteByExample" parameterType="com.engine.model.ModelResultHitItemExample" >
     delete from model_result_hit_item
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.engine.test.model.ModelResultHitItem" >
+  <insert id="insert" parameterType="com.engine.model.ModelResultHitItem" >
     insert into model_result_hit_item (id, result_id, mode_id, 
       hit_item_id, hit_item_desc, group_id, 
       group_name, group_desc, points, 
@@ -124,7 +124,7 @@
       #{refuseReason,jdbcType=VARCHAR}, #{params,jdbcType=VARCHAR}, #{paramName,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.engine.test.model.ModelResultHitItem" >
+  <insert id="insertSelective" parameterType="com.engine.model.ModelResultHitItem" >
     insert into model_result_hit_item
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -221,7 +221,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.engine.test.model.ModelResultHitItemExample" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="com.engine.model.ModelResultHitItemExample" resultType="java.lang.Integer" >
     select count(*) from model_result_hit_item
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
@@ -301,7 +301,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.engine.test.model.ModelResultHitItem" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.engine.model.ModelResultHitItem" >
     update model_result_hit_item
     <set >
       <if test="resultId != null" >
@@ -349,7 +349,7 @@
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.engine.test.model.ModelResultHitItem" >
+  <update id="updateByPrimaryKey" parameterType="com.engine.model.ModelResultHitItem" >
     update model_result_hit_item
     set result_id = #{resultId,jdbcType=VARCHAR},
       mode_id = #{modeId,jdbcType=VARCHAR},

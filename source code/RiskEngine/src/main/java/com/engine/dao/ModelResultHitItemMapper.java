@@ -1,8 +1,10 @@
-package com.engine.test.dao;
+package com.engine.dao;
 
-import com.engine.test.model.ModelResultHitItem;
-import com.engine.test.model.ModelResultHitItemExample;
+import com.engine.model.ModelResultHitItem;
+import com.engine.model.ModelResultHitItemExample;
+
 import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
 public interface ModelResultHitItemMapper {

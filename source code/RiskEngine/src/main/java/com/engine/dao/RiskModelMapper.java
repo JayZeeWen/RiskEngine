@@ -1,8 +1,10 @@
-package com.engine.test.dao;
+package com.engine.dao;
 
-import com.engine.test.model.RiskModel;
-import com.engine.test.model.RiskModelExample;
+import com.engine.model.RiskModel;
+import com.engine.model.RiskModelExample;
+
 import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
 public interface RiskModelMapper {

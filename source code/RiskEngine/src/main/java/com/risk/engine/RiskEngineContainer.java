@@ -17,9 +17,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.CollectionUtils;
 
-import com.engine.test.dao.RiskModelMapper;
-import com.engine.test.model.RiskModel;
-import com.engine.test.model.RiskModelExample;
+import com.engine.dao.RiskModelMapper;
+import com.engine.model.RiskModel;
+import com.engine.model.RiskModelExample;
 import com.risk.engine.entity.GItem;
 import com.risk.engine.entity.Group;
 import com.risk.engine.entity.Item;

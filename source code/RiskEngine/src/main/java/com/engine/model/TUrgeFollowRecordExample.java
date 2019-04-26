@@ -1,4 +1,4 @@
-package com.engine.test.model;
+package com.engine.model;
 
 import java.util.ArrayList;
 import java.util.Date;
