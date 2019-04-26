@@ -1,0 +1,370 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.engine.test.dao.ModelResultHitItemMapper" >
+  <resultMap id="BaseResultMap" type="com.engine.test.model.ModelResultHitItem" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="result_id" property="resultId" jdbcType="VARCHAR" />
+    <result column="mode_id" property="modeId" jdbcType="VARCHAR" />
+    <result column="hit_item_id" property="hitItemId" jdbcType="VARCHAR" />
+    <result column="hit_item_desc" property="hitItemDesc" jdbcType="VARCHAR" />
+    <result column="group_id" property="groupId" jdbcType="VARCHAR" />
+    <result column="group_name" property="groupName" jdbcType="VARCHAR" />
+    <result column="group_desc" property="groupDesc" jdbcType="VARCHAR" />
+    <result column="points" property="points" jdbcType="DECIMAL" />
+    <result column="is_hit" property="isHit" jdbcType="VARCHAR" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+    <result column="refuse_reason" property="refuseReason" jdbcType="VARCHAR" />
+    <result column="params" property="params" jdbcType="VARCHAR" />
+    <result column="param_name" property="paramName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, result_id, mode_id, hit_item_id, hit_item_desc, group_id, group_name, group_desc, 
+    points, is_hit, create_date, update_date, refuse_reason, params, param_name
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.engine.test.model.ModelResultHitItemExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from model_result_hit_item
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from model_result_hit_item
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from model_result_hit_item
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.engine.test.model.ModelResultHitItemExample" >
+    delete from model_result_hit_item
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.engine.test.model.ModelResultHitItem" >
+    insert into model_result_hit_item (id, result_id, mode_id, 
+      hit_item_id, hit_item_desc, group_id, 
+      group_name, group_desc, points, 
+      is_hit, create_date, update_date, 
+      refuse_reason, params, param_name
+      )
+    values (#{id,jdbcType=VARCHAR}, #{resultId,jdbcType=VARCHAR}, #{modeId,jdbcType=VARCHAR}, 
+      #{hitItemId,jdbcType=VARCHAR}, #{hitItemDesc,jdbcType=VARCHAR}, #{groupId,jdbcType=VARCHAR}, 
+      #{groupName,jdbcType=VARCHAR}, #{groupDesc,jdbcType=VARCHAR}, #{points,jdbcType=DECIMAL}, 
+      #{isHit,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}, 
+      #{refuseReason,jdbcType=VARCHAR}, #{params,jdbcType=VARCHAR}, #{paramName,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.engine.test.model.ModelResultHitItem" >
+    insert into model_result_hit_item
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="resultId != null" >
+        result_id,
+      </if>
+      <if test="modeId != null" >
+        mode_id,
+      </if>
+      <if test="hitItemId != null" >
+        hit_item_id,
+      </if>
+      <if test="hitItemDesc != null" >
+        hit_item_desc,
+      </if>
+      <if test="groupId != null" >
+        group_id,
+      </if>
+      <if test="groupName != null" >
+        group_name,
+      </if>
+      <if test="groupDesc != null" >
+        group_desc,
+      </if>
+      <if test="points != null" >
+        points,
+      </if>
+      <if test="isHit != null" >
+        is_hit,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
+      </if>
+      <if test="refuseReason != null" >
+        refuse_reason,
+      </if>
+      <if test="params != null" >
+        params,
+      </if>
+      <if test="paramName != null" >
+        param_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="resultId != null" >
+        #{resultId,jdbcType=VARCHAR},
+      </if>
+      <if test="modeId != null" >
+        #{modeId,jdbcType=VARCHAR},
+      </if>
+      <if test="hitItemId != null" >
+        #{hitItemId,jdbcType=VARCHAR},
+      </if>
+      <if test="hitItemDesc != null" >
+        #{hitItemDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="groupId != null" >
+        #{groupId,jdbcType=VARCHAR},
+      </if>
+      <if test="groupName != null" >
+        #{groupName,jdbcType=VARCHAR},
+      </if>
+      <if test="groupDesc != null" >
+        #{groupDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="points != null" >
+        #{points,jdbcType=DECIMAL},
+      </if>
+      <if test="isHit != null" >
+        #{isHit,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="refuseReason != null" >
+        #{refuseReason,jdbcType=VARCHAR},
+      </if>
+      <if test="params != null" >
+        #{params,jdbcType=VARCHAR},
+      </if>
+      <if test="paramName != null" >
+        #{paramName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.engine.test.model.ModelResultHitItemExample" resultType="java.lang.Integer" >
+    select count(*) from model_result_hit_item
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update model_result_hit_item
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.resultId != null" >
+        result_id = #{record.resultId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.modeId != null" >
+        mode_id = #{record.modeId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hitItemId != null" >
+        hit_item_id = #{record.hitItemId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hitItemDesc != null" >
+        hit_item_desc = #{record.hitItemDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.groupId != null" >
+        group_id = #{record.groupId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.groupName != null" >
+        group_name = #{record.groupName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.groupDesc != null" >
+        group_desc = #{record.groupDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.points != null" >
+        points = #{record.points,jdbcType=DECIMAL},
+      </if>
+      <if test="record.isHit != null" >
+        is_hit = #{record.isHit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createDate != null" >
+        create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateDate != null" >
+        update_date = #{record.updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.refuseReason != null" >
+        refuse_reason = #{record.refuseReason,jdbcType=VARCHAR},
+      </if>
+      <if test="record.params != null" >
+        params = #{record.params,jdbcType=VARCHAR},
+      </if>
+      <if test="record.paramName != null" >
+        param_name = #{record.paramName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update model_result_hit_item
+    set id = #{record.id,jdbcType=VARCHAR},
+      result_id = #{record.resultId,jdbcType=VARCHAR},
+      mode_id = #{record.modeId,jdbcType=VARCHAR},
+      hit_item_id = #{record.hitItemId,jdbcType=VARCHAR},
+      hit_item_desc = #{record.hitItemDesc,jdbcType=VARCHAR},
+      group_id = #{record.groupId,jdbcType=VARCHAR},
+      group_name = #{record.groupName,jdbcType=VARCHAR},
+      group_desc = #{record.groupDesc,jdbcType=VARCHAR},
+      points = #{record.points,jdbcType=DECIMAL},
+      is_hit = #{record.isHit,jdbcType=VARCHAR},
+      create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      update_date = #{record.updateDate,jdbcType=TIMESTAMP},
+      refuse_reason = #{record.refuseReason,jdbcType=VARCHAR},
+      params = #{record.params,jdbcType=VARCHAR},
+      param_name = #{record.paramName,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.engine.test.model.ModelResultHitItem" >
+    update model_result_hit_item
+    <set >
+      <if test="resultId != null" >
+        result_id = #{resultId,jdbcType=VARCHAR},
+      </if>
+      <if test="modeId != null" >
+        mode_id = #{modeId,jdbcType=VARCHAR},
+      </if>
+      <if test="hitItemId != null" >
+        hit_item_id = #{hitItemId,jdbcType=VARCHAR},
+      </if>
+      <if test="hitItemDesc != null" >
+        hit_item_desc = #{hitItemDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="groupId != null" >
+        group_id = #{groupId,jdbcType=VARCHAR},
+      </if>
+      <if test="groupName != null" >
+        group_name = #{groupName,jdbcType=VARCHAR},
+      </if>
+      <if test="groupDesc != null" >
+        group_desc = #{groupDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="points != null" >
+        points = #{points,jdbcType=DECIMAL},
+      </if>
+      <if test="isHit != null" >
+        is_hit = #{isHit,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="refuseReason != null" >
+        refuse_reason = #{refuseReason,jdbcType=VARCHAR},
+      </if>
+      <if test="params != null" >
+        params = #{params,jdbcType=VARCHAR},
+      </if>
+      <if test="paramName != null" >
+        param_name = #{paramName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.engine.test.model.ModelResultHitItem" >
+    update model_result_hit_item
+    set result_id = #{resultId,jdbcType=VARCHAR},
+      mode_id = #{modeId,jdbcType=VARCHAR},
+      hit_item_id = #{hitItemId,jdbcType=VARCHAR},
+      hit_item_desc = #{hitItemDesc,jdbcType=VARCHAR},
+      group_id = #{groupId,jdbcType=VARCHAR},
+      group_name = #{groupName,jdbcType=VARCHAR},
+      group_desc = #{groupDesc,jdbcType=VARCHAR},
+      points = #{points,jdbcType=DECIMAL},
+      is_hit = #{isHit,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      refuse_reason = #{refuseReason,jdbcType=VARCHAR},
+      params = #{params,jdbcType=VARCHAR},
+      param_name = #{paramName,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
