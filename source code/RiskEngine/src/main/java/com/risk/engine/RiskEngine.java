@@ -77,6 +77,7 @@ public class RiskEngine {
 		Result result = Result.create();
 		result.setPass(true);
 		List<String> msgList = new ArrayList();
+		List<String> tagList = new ArrayList<>();
 		IExpressContext<String, Object> context = null;
 		//context.
 		RiskModelTemplate model = RiskEngineContainer.getRiskModel(id);
@@ -96,7 +97,7 @@ public class RiskEngine {
 					BigDecimal p =  MathUtils.defaultZero(item.getPoints()).setScale(2,BigDecimal.ROUND_HALF_UP);
 					context = getIExpressContext(params, item.getParamNames());
 					sb.append( String.format("  规则 ：【%s】 ",item.getDesc())) ;
-					res = (Boolean)runner.execute(item.getExpression(), context, null, true, false);
+ 					res = (Boolean)runner.execute(item.getExpression(), context, null, true, false);
 					
 					ModelResultHitItem entity = new ModelResultHitItem();
 					entity.setHitItemId(item.getId());
@@ -105,13 +106,17 @@ public class RiskEngine {
 					entity.setParams(context.toString());
 					entity.setRefuseReason(item.getRefuseReason());
 					entity.setParamName(item.getParamDescs());
+					entity.setTag(item.getTag());
+					
 					
 					if(res){//命中规则减分		
 						entity.setIsHit("1");
 						sb.append(String.format(" 命中 减  %s 分%n ", p))  ;						
 						p = MathUtils.defaultZero(result.getOrderPoints()).subtract(p).setScale(2,BigDecimal.ROUND_HALF_UP);
 						result.setOrderPoints(p);
-						
+						if(!StringUtils.isEmpty(entity.getTag())){
+							tagList.add(entity.getTag());
+						}
 						if(item.isRefuse()){
 							result.setPass(false);						
 							if(item.isRefuseBreak()){
@@ -121,13 +126,10 @@ public class RiskEngine {
 							}
 						}
 					}else{//未命中加分
-
 						entity.setIsHit("0");
 						sb.append( String.format(" 未命中 加  %s 分  %n", p ))  ;
 						p = p.add(MathUtils.defaultZero(result.getOrderPoints())).setScale(2,BigDecimal.ROUND_HALF_UP);
 						result.setOrderPoints(p);
-						
-						
 					}
 					itemList.add(entity);
 				} catch (Exception e) {
@@ -248,6 +250,7 @@ public class RiskEngine {
 			}
 		}
 		result.setRefuseReason(refuseReason);
+		result.setTags(tagList);
 		return result;
 	}
 	
@@ -415,6 +418,7 @@ public class RiskEngine {
 					|| "java.lang.Float".equals(f.getType().getName())
 					|| "java.util.Date".equals(f.getType().getName())
 					|| "java.math.BigDecimal".equals(f.getType().getName())){
+				//约定以"类名_属性名"作为key
 				params.put(simpleName + "_" + f.getName() , f.get(o));
 			}else{
 				params.putAll(parseObject(f.get(o)));

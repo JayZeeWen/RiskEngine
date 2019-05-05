@@ -46,6 +46,11 @@ public class Result implements Serializable{
 	 */
 	private List<String> refuseReason;
 	
+	/**
+	 * 命中标签集
+	 */
+	private List<String> tags;
+	
 	private List<ModelResultHitItem> hitItems;
 	
 	public static Result create(){
@@ -118,9 +123,14 @@ public class Result implements Serializable{
 	public void setRefuseReason(List<String> refuseReason) {
 		this.refuseReason = refuseReason;
 	}
-	
-	
-	
+
+	public List<String> getTags() {
+		return tags;
+	}
+
+	public void setTags(List<String> tags) {
+		this.tags = tags;
+	}
 	
 	
 }

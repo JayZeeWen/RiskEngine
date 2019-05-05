@@ -98,6 +98,21 @@
 		  <artifactId>QLExpress</artifactId>
 		  <version>3.2.0</version>
 		</dependency>
+		
+		<!-- 对象映射组件 -->
+		<dependency>
+		  <groupId>net.sf.dozer</groupId>
+		  <artifactId>dozer-spring</artifactId>
+		  <version>5.5.1</version>
+		</dependency>
+		<!-- 对象映射组件 -->
+		<dependency>
+		  <groupId>net.sf.dozer</groupId>
+		  <artifactId>dozer</artifactId>
+		  <version>5.5.1</version>
+		</dependency>
+		
+		
 	</dependencies>
 
 	<build>

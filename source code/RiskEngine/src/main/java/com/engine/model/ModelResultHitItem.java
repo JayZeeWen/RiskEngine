@@ -78,6 +78,11 @@ public class ModelResultHitItem {
      * 
      */
     private String paramName;
+    
+    /**
+     * 标签
+     */
+    private String tag;
 
     /**
      * 
@@ -318,4 +323,14 @@ public class ModelResultHitItem {
     public void setParamName(String paramName) {
         this.paramName = paramName == null ? null : paramName.trim();
     }
+
+	public String getTag() {
+		return tag;
+	}
+
+	public void setTag(String tag) {
+		this.tag = tag;
+	}
+    
+    
 }

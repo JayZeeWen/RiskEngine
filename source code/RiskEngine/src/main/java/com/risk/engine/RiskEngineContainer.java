@@ -101,6 +101,7 @@ public class RiskEngineContainer {
 						i.setRefuseBreak(Boolean.valueOf(e.attributeValue("refuseBreak")));
 					}
 					i.setRefuseReason(e.attributeValue("refuseReason"));
+					i.setTag(e.attributeValue("tag"));//标签
 					i.setOrder(Integer.valueOf(e.attributeValue("order")));
 					i.setPoints(BigDecimal.valueOf(Float.valueOf(e.attributeValue("points"))));					
 					i.setRefuse(Boolean.valueOf(e.attributeValue("refuse")));

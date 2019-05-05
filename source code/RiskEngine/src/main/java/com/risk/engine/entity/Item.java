@@ -32,6 +32,8 @@ public class Item {
 	private String refuseReason;
 	
 	private String paramDescs;
+	
+	private String tag;
 
 	public String getId() {
 		return id;
@@ -120,6 +122,16 @@ public class Item {
 	public void setRefuseBreak(boolean refuseBreak) {
 		this.refuseBreak = refuseBreak;
 	}
+
+	public String getTag() {
+		return tag;
+	}
+
+	public void setTag(String tag) {
+		this.tag = tag;
+	}
+	
+	
 	
 	
 
