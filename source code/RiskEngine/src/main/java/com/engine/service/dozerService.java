@@ -1,9 +1,9 @@
 package com.engine.service;
 
-import ocm.engine.config.DozerConfig;
-
 import org.dozer.Mapper;
 import org.springframework.stereotype.Component;
+
+import com.engine.config.DozerConfig;
 
 
 
