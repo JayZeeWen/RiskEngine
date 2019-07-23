@@ -6,3 +6,8 @@
 
 引擎使用框架为 spring boot + mybatis 数据库使用 mysql ,规则实现主要使用阿里组件QLExpress
 
+
+#关于测试
+项目启动成功后可访问 localhost:8095//test/testEngine 调用测试接口进行测试 及 主要代码逻辑的阅读
+
+
