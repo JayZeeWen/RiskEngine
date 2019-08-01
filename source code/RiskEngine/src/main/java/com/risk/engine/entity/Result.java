@@ -11,7 +11,7 @@ import com.engine.util.MathUtils;
 
 /**
  * 引擎执行结果
- * @author Peter 马克
+ * @author JayZee 文
  *
  */
 public class Result implements Serializable{

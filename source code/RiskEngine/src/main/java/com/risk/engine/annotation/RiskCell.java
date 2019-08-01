@@ -9,7 +9,7 @@ import java.lang.annotation.Target;
 
 /**
  * 计算单元注解
- * @author Peter 马克
+ * @author JayZee 文
  *
  */
 @Documented

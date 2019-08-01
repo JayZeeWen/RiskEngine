@@ -5,7 +5,7 @@ import java.util.List;
 
 /**
  * group定义
- * @author Peter 马克
+ * @author JayZee 文
  *
  */
 public class Group {

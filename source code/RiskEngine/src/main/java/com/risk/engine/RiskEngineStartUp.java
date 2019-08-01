@@ -7,7 +7,7 @@ import org.springframework.context.event.ContextRefreshedEvent;
 
 /**
  * 风控引擎启动入口
- * @author Peter 马克
+ * @author JayZee 文
  *
  */
 @Configuration

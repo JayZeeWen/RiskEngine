@@ -4,7 +4,7 @@ import java.util.List;
 
 /**
  * 下一节点信息
- * @author Peter 马克
+ * @author JayZee 文
  *
  */
 public class Next {

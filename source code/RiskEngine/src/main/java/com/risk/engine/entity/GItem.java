@@ -5,7 +5,7 @@ import java.util.List;
 
 /**
  * group 下item配置类型定义
- * @author Peter 马克
+ * @author JayZee 文
  *
  */
 public class GItem {

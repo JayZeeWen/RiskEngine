@@ -1,7 +1,10 @@
 package com.engine.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import com.engine.data.ReflexParams;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -45,6 +48,28 @@ public class testController {
 		
         return "succ";
     }
+
+	@ResponseBody
+	@RequestMapping(value = "/testRiskEngineWithRef")
+    public String testRiskEngineWithRef(){
+
+		String modelId = "3";
+		Map<String,Object> params = new HashMap<>();
+		try {
+			ReflexParams p = new ReflexParams();
+			p.setUserId("3332");
+			p.setOrderId("sdf");
+
+			//执行模型并得到结果
+			Result r =  RiskEngine.executeWithReflex(modelId,p);
+			System.out.println(r.getMessages());
+
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return  "Succ";
+
+	}
 	
 	/**
 	 * 获取 命中的规则详情
@@ -54,7 +79,6 @@ public class testController {
 	@ResponseBody
 	@RequestMapping(value = "/getResultDetail")
     public String  getResultDetail(String resultId) {
-		
 		//根据模型结果 获取 命中的规则详情
 		List<ModelResultHitItemExt> list = resultHitItemService.getHitItemExtByResultId(resultId);
         return "succ";
