@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Map;
 
 import com.engine.data.ReflexParams;
+import com.engine.util.VelocityUtil;
+import org.apache.velocity.VelocityContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,6 +30,9 @@ public class testController {
 	
 	@Autowired
 	private ModelResultHitItemService resultHitItemService;
+
+	@Autowired
+	private  VelocityUtil velocityUtils;
 	
 	@ResponseBody
 	@RequestMapping(value = "/testEngine")
@@ -83,5 +88,17 @@ public class testController {
 		List<ModelResultHitItemExt> list = resultHitItemService.getHitItemExtByResultId(resultId);
         return "succ";
     }
+
+	@ResponseBody
+	@RequestMapping(value = "/testVeclo")
+	public String  testVeclo() {
+		VelocityContext context = new VelocityContext();
+
+		String result = velocityUtils.generateRiskModelByTemp(context);
+		return result;
+	}
+
+
+
 	
 }

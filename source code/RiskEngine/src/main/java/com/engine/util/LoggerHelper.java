@@ -6,10 +6,10 @@ import org.slf4j.LoggerFactory;
 /**
  * 日志帮助类
  */
-public class LoginHelper {
+public class LoggerHelper {
 
     private static Logger helperLogger = LoggerFactory
-            .getLogger(LoginHelper.class);
+            .getLogger(LoggerHelper.class);
 
     public static void info(String message,String fullClassName){
         helperLogger.info(fullClassName +" info :" +message);
@@ -21,5 +21,16 @@ public class LoginHelper {
 
     public static void error(Logger logger,String msg ){
         logger.error(msg);
+    }
+
+    public static void error(Logger logger,Exception e){
+        String msg = ExceptionUtils.getStackTrace(e);
+        error(logger,msg);
+    }
+
+    public static void error(Logger logger,Exception e,String msg ){
+        msg += "  /n ";
+        msg += ExceptionUtils.getStackTrace(e);
+        error(logger,msg);
     }
 }

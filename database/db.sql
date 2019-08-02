@@ -56,6 +56,123 @@ CREATE TABLE `risk_model` (
 
 
 
+/*
+Navicat MySQL Data Transfer
+
+Source Server         : local
+Source Server Version : 50720
+Source Host           : localhost:3306
+Source Database       : engine
+
+Target Server Type    : MYSQL
+Target Server Version : 50720
+File Encoding         : 65001
+
+Date: 2019-08-02 11:39:48
+*/
+
+SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for model_item
+-- ----------------------------
+DROP TABLE IF EXISTS `model_item`;
+CREATE TABLE `model_item` (
+  `id` varchar(64) NOT NULL,
+  `risk_mode_id` varchar(64) DEFAULT NULL,
+  `type` int(11) DEFAULT NULL COMMENT '1 order  （顺序执行）  2 decisioin  （根据决策顺序执行）',
+  `create_date` datetime DEFAULT NULL,
+  `update_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='风控模型项配置';
+
+-- ----------------------------
+-- Table structure for model_next_line_list
+-- ----------------------------
+DROP TABLE IF EXISTS `model_next_line_list`;
+CREATE TABLE `model_next_line_list` (
+  `id` varchar(32) NOT NULL,
+  `model_id` varchar(32) DEFAULT NULL,
+  `pre_id` varchar(32) DEFAULT NULL COMMENT '前节点',
+  `next_id` varchar(32) DEFAULT NULL COMMENT '后节点',
+  `line_type` int(11) DEFAULT NULL COMMENT '0 :item    1 : group',
+  `exp` longtext COMMENT '表达式',
+  `params` longtext COMMENT '参数',
+  `param_names` text COMMENT '参数名称   （例子：UcBasicInfo_age=年龄,UcBasicInfo_gender=性别 ）',
+  `create_date` datetime DEFAULT NULL,
+  `update_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='树节点连接表';
+
+-- ----------------------------
+-- Table structure for modle_decision_group
+-- ----------------------------
+DROP TABLE IF EXISTS `modle_decision_group`;
+CREATE TABLE `modle_decision_group` (
+  `id` varchar(64) NOT NULL,
+  `model_id` varchar(64) DEFAULT NULL,
+  `model_item_id` varchar(64) DEFAULT NULL COMMENT '模型项id',
+  `group_name` varchar(64) DEFAULT NULL,
+  `group_desc` varchar(64) DEFAULT NULL,
+  `group_no` varchar(64) DEFAULT NULL COMMENT '对应xml配置的gid',
+  `is_start` tinyint(1) DEFAULT NULL COMMENT '是否该组开始',
+  `tag` varchar(32) DEFAULT NULL COMMENT '标签',
+  `points` decimal(9,2) DEFAULT NULL COMMENT '分值',
+  `create_date` datetime DEFAULT NULL,
+  `update_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='模型decision组配置   对应 xml配置的 decisions -> group';
+
+-- ----------------------------
+-- Table structure for modle_group_item
+-- ----------------------------
+DROP TABLE IF EXISTS `modle_group_item`;
+CREATE TABLE `modle_group_item` (
+  `id` varchar(64) NOT NULL,
+  `group_id` varchar(64) DEFAULT NULL COMMENT '模型orderId',
+  `name` varchar(64) DEFAULT NULL COMMENT '名称',
+  `descri` varchar(64) DEFAULT NULL COMMENT '描述',
+  `item_no` varchar(64) DEFAULT NULL COMMENT '对应xml配置的id',
+  `sort` int(11) DEFAULT NULL COMMENT '排序(对应配置中的order)',
+  `start` tinyint(1) DEFAULT NULL,
+  `false_continue` varchar(64) DEFAULT NULL COMMENT '未命中是否跳出group（continue     break）',
+  `true_continue` varchar(64) DEFAULT NULL COMMENT '命中是否跳出group   （continue     break）',
+  `tag` varchar(32) DEFAULT NULL COMMENT '标签',
+  `parent_falsecontinue` varchar(64) DEFAULT NULL,
+  `points` decimal(9,2) DEFAULT NULL COMMENT '分值',
+  `exp` varchar(256) DEFAULT NULL COMMENT '表达式',
+  `params` varchar(256) DEFAULT NULL COMMENT '参数（以 逗号分隔）',
+  `param_names` text COMMENT '参数名称   （例子：UcBasicInfo_age=年龄,UcBasicInfo_gender=性别 ）',
+  `create_date` datetime DEFAULT NULL,
+  `update_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='模型group项配置  对应 xml配置的 decisions -> group -> item';
+
+-- ----------------------------
+-- Table structure for modle_order_item
+-- ----------------------------
+DROP TABLE IF EXISTS `modle_order_item`;
+CREATE TABLE `modle_order_item` (
+  `id` varchar(64) NOT NULL,
+  `model_id` varchar(64) DEFAULT NULL,
+  `model_item_id` varchar(64) DEFAULT NULL COMMENT '模型项id',
+  `name` varchar(64) DEFAULT NULL,
+  `descri` varchar(64) DEFAULT NULL,
+  `item_no` varchar(64) DEFAULT NULL COMMENT '对应xml配置的id',
+  `sort` int(11) DEFAULT NULL COMMENT '排序 （ 对应配置中的 order）',
+  `is_refuse` tinyint(1) DEFAULT NULL COMMENT '是否继续执行',
+  `points` decimal(9,2) DEFAULT NULL COMMENT '分值',
+  `tag` varchar(32) DEFAULT NULL COMMENT '标签',
+  `exp` varchar(256) DEFAULT NULL COMMENT '表达式',
+  `params` varchar(256) DEFAULT NULL COMMENT '参数（以 逗号分隔）',
+  `param_names` text COMMENT '参数名称   （例子：UcBasicInfo_age=年龄,UcBasicInfo_gender=性别 ）',
+  `create_date` datetime DEFAULT NULL,
+  `update_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='模型order项配置';
+
+
+
 -- ----------------------------
 -- Records of risk_model
 -- ----------------------------

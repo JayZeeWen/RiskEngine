@@ -1,0 +1,428 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.engine.dao.ModleOrderItemMapper" >
+  <resultMap id="BaseResultMap" type="com.engine.model.ModleOrderItem" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="model_id" property="modelId" jdbcType="VARCHAR" />
+    <result column="model_item_id" property="modelItemId" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="descri" property="descri" jdbcType="VARCHAR" />
+    <result column="item_no" property="itemNo" jdbcType="VARCHAR" />
+    <result column="sort" property="sort" jdbcType="INTEGER" />
+    <result column="is_refuse" property="isRefuse" jdbcType="BIT" />
+    <result column="points" property="points" jdbcType="DECIMAL" />
+    <result column="tag" property="tag" jdbcType="VARCHAR" />
+    <result column="exp" property="exp" jdbcType="VARCHAR" />
+    <result column="params" property="params" jdbcType="VARCHAR" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.engine.model.ModleOrderItem" extends="BaseResultMap" >
+    <result column="param_names" property="paramNames" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, model_id, model_item_id, name, descri, item_no, sort, is_refuse, points, tag, 
+    exp, params, create_date, update_date
+  </sql>
+  <sql id="Blob_Column_List" >
+    param_names
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.engine.model.ModleOrderItemExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from modle_order_item
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.engine.model.ModleOrderItemExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from modle_order_item
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from modle_order_item
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from modle_order_item
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.engine.model.ModleOrderItemExample" >
+    delete from modle_order_item
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.engine.model.ModleOrderItem" >
+    insert into modle_order_item (id, model_id, model_item_id, 
+      name, descri, item_no, 
+      sort, is_refuse, points, 
+      tag, exp, params, create_date, 
+      update_date, param_names)
+    values (#{id,jdbcType=VARCHAR}, #{modelId,jdbcType=VARCHAR}, #{modelItemId,jdbcType=VARCHAR}, 
+      #{name,jdbcType=VARCHAR}, #{descri,jdbcType=VARCHAR}, #{itemNo,jdbcType=VARCHAR}, 
+      #{sort,jdbcType=INTEGER}, #{isRefuse,jdbcType=BIT}, #{points,jdbcType=DECIMAL}, 
+      #{tag,jdbcType=VARCHAR}, #{exp,jdbcType=VARCHAR}, #{params,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{updateDate,jdbcType=TIMESTAMP}, #{paramNames,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.engine.model.ModleOrderItem" >
+    insert into modle_order_item
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="modelId != null" >
+        model_id,
+      </if>
+      <if test="modelItemId != null" >
+        model_item_id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="descri != null" >
+        descri,
+      </if>
+      <if test="itemNo != null" >
+        item_no,
+      </if>
+      <if test="sort != null" >
+        sort,
+      </if>
+      <if test="isRefuse != null" >
+        is_refuse,
+      </if>
+      <if test="points != null" >
+        points,
+      </if>
+      <if test="tag != null" >
+        tag,
+      </if>
+      <if test="exp != null" >
+        exp,
+      </if>
+      <if test="params != null" >
+        params,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
+      </if>
+      <if test="paramNames != null" >
+        param_names,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="modelId != null" >
+        #{modelId,jdbcType=VARCHAR},
+      </if>
+      <if test="modelItemId != null" >
+        #{modelItemId,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="descri != null" >
+        #{descri,jdbcType=VARCHAR},
+      </if>
+      <if test="itemNo != null" >
+        #{itemNo,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null" >
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="isRefuse != null" >
+        #{isRefuse,jdbcType=BIT},
+      </if>
+      <if test="points != null" >
+        #{points,jdbcType=DECIMAL},
+      </if>
+      <if test="tag != null" >
+        #{tag,jdbcType=VARCHAR},
+      </if>
+      <if test="exp != null" >
+        #{exp,jdbcType=VARCHAR},
+      </if>
+      <if test="params != null" >
+        #{params,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="paramNames != null" >
+        #{paramNames,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.engine.model.ModleOrderItemExample" resultType="java.lang.Integer" >
+    select count(*) from modle_order_item
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update modle_order_item
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.modelId != null" >
+        model_id = #{record.modelId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.modelItemId != null" >
+        model_item_id = #{record.modelItemId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null" >
+        name = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.descri != null" >
+        descri = #{record.descri,jdbcType=VARCHAR},
+      </if>
+      <if test="record.itemNo != null" >
+        item_no = #{record.itemNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sort != null" >
+        sort = #{record.sort,jdbcType=INTEGER},
+      </if>
+      <if test="record.isRefuse != null" >
+        is_refuse = #{record.isRefuse,jdbcType=BIT},
+      </if>
+      <if test="record.points != null" >
+        points = #{record.points,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tag != null" >
+        tag = #{record.tag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.exp != null" >
+        exp = #{record.exp,jdbcType=VARCHAR},
+      </if>
+      <if test="record.params != null" >
+        params = #{record.params,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createDate != null" >
+        create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateDate != null" >
+        update_date = #{record.updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.paramNames != null" >
+        param_names = #{record.paramNames,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update modle_order_item
+    set id = #{record.id,jdbcType=VARCHAR},
+      model_id = #{record.modelId,jdbcType=VARCHAR},
+      model_item_id = #{record.modelItemId,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      descri = #{record.descri,jdbcType=VARCHAR},
+      item_no = #{record.itemNo,jdbcType=VARCHAR},
+      sort = #{record.sort,jdbcType=INTEGER},
+      is_refuse = #{record.isRefuse,jdbcType=BIT},
+      points = #{record.points,jdbcType=DECIMAL},
+      tag = #{record.tag,jdbcType=VARCHAR},
+      exp = #{record.exp,jdbcType=VARCHAR},
+      params = #{record.params,jdbcType=VARCHAR},
+      create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      update_date = #{record.updateDate,jdbcType=TIMESTAMP},
+      param_names = #{record.paramNames,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update modle_order_item
+    set id = #{record.id,jdbcType=VARCHAR},
+      model_id = #{record.modelId,jdbcType=VARCHAR},
+      model_item_id = #{record.modelItemId,jdbcType=VARCHAR},
+      name = #{record.name,jdbcType=VARCHAR},
+      descri = #{record.descri,jdbcType=VARCHAR},
+      item_no = #{record.itemNo,jdbcType=VARCHAR},
+      sort = #{record.sort,jdbcType=INTEGER},
+      is_refuse = #{record.isRefuse,jdbcType=BIT},
+      points = #{record.points,jdbcType=DECIMAL},
+      tag = #{record.tag,jdbcType=VARCHAR},
+      exp = #{record.exp,jdbcType=VARCHAR},
+      params = #{record.params,jdbcType=VARCHAR},
+      create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      update_date = #{record.updateDate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.engine.model.ModleOrderItem" >
+    update modle_order_item
+    <set >
+      <if test="modelId != null" >
+        model_id = #{modelId,jdbcType=VARCHAR},
+      </if>
+      <if test="modelItemId != null" >
+        model_item_id = #{modelItemId,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="descri != null" >
+        descri = #{descri,jdbcType=VARCHAR},
+      </if>
+      <if test="itemNo != null" >
+        item_no = #{itemNo,jdbcType=VARCHAR},
+      </if>
+      <if test="sort != null" >
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="isRefuse != null" >
+        is_refuse = #{isRefuse,jdbcType=BIT},
+      </if>
+      <if test="points != null" >
+        points = #{points,jdbcType=DECIMAL},
+      </if>
+      <if test="tag != null" >
+        tag = #{tag,jdbcType=VARCHAR},
+      </if>
+      <if test="exp != null" >
+        exp = #{exp,jdbcType=VARCHAR},
+      </if>
+      <if test="params != null" >
+        params = #{params,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="paramNames != null" >
+        param_names = #{paramNames,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.engine.model.ModleOrderItem" >
+    update modle_order_item
+    set model_id = #{modelId,jdbcType=VARCHAR},
+      model_item_id = #{modelItemId,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      descri = #{descri,jdbcType=VARCHAR},
+      item_no = #{itemNo,jdbcType=VARCHAR},
+      sort = #{sort,jdbcType=INTEGER},
+      is_refuse = #{isRefuse,jdbcType=BIT},
+      points = #{points,jdbcType=DECIMAL},
+      tag = #{tag,jdbcType=VARCHAR},
+      exp = #{exp,jdbcType=VARCHAR},
+      params = #{params,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      param_names = #{paramNames,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.engine.model.ModleOrderItem" >
+    update modle_order_item
+    set model_id = #{modelId,jdbcType=VARCHAR},
+      model_item_id = #{modelItemId,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      descri = #{descri,jdbcType=VARCHAR},
+      item_no = #{itemNo,jdbcType=VARCHAR},
+      sort = #{sort,jdbcType=INTEGER},
+      is_refuse = #{isRefuse,jdbcType=BIT},
+      points = #{points,jdbcType=DECIMAL},
+      tag = #{tag,jdbcType=VARCHAR},
+      exp = #{exp,jdbcType=VARCHAR},
+      params = #{params,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_date = #{updateDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

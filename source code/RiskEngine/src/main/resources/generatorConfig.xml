@@ -15,12 +15,12 @@
             <property name="suppressDate" value="false"/>
         </commentGenerator> 
 
-        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://172.16.201.22:3306/credit_biz_risk?useUnicode=true&amp;characterEncoding=utf-8"
-                        userId="root" password="123456">
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://127.0.0.1:3306/engine?useUnicode=true&amp;characterEncoding=utf-8"
+                        userId="root" password="a123456">
         </jdbcConnection>
 
         <!-- Model类自动生成 -->
-        <javaModelGenerator targetPackage="com.engine.test.model" targetProject="src/main/java">
+        <javaModelGenerator targetPackage="com.engine.model" targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
             <property name="trimStrings" value="true"/>
         </javaModelGenerator>
@@ -31,14 +31,18 @@
         </sqlMapGenerator>
 
         <!-- Mapper类自动生成 -->
-        <javaClientGenerator type="XMLMAPPER" targetPackage="com.engine.test.dao" targetProject="src/main/java"/>
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.engine.dao" targetProject="src/main/java"/>
 
         <!-- 所有的表 -->
         <!-- <table tableName="uc_basic_info" ></table>
         <table tableName="model_result_hit_item" ></table>
         <table tableName="risk_model" ></table>
         <table tableName="uc_basic_info" ></table> -->
-        <table tableName="risk_model" ></table>
+        <table tableName="model_item" ></table>
+        <table tableName="model_next_line_list" ></table>
+        <table tableName="modle_decision_group" ></table>
+        <table tableName="modle_group_item" ></table>
+        <table tableName="modle_order_item" ></table>
        
     </context>
 </generatorConfiguration>

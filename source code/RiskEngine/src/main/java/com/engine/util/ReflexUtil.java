@@ -21,7 +21,7 @@ public class ReflexUtil {
 			return obj;
 		} catch (Exception e) {
 			String msg = "反射调用异常("+e.getMessage()+":" + className+")";
-			LoginHelper.error(msg, ReflexUtil.class.getName());
+			LoggerHelper.error(msg, ReflexUtil.class.getName());
 			throw new RuntimeException(e);
 		}
 	}

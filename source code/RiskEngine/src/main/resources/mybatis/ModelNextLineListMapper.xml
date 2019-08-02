@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.engine.dao.ModelNextLineListMapper" >
+  <resultMap id="BaseResultMap" type="com.engine.model.ModelNextLineList" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="model_id" property="modelId" jdbcType="VARCHAR" />
+    <result column="pre_id" property="preId" jdbcType="VARCHAR" />
+    <result column="next_id" property="nextId" jdbcType="VARCHAR" />
+    <result column="line_type" property="lineType" jdbcType="INTEGER" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.engine.model.ModelNextLineListWithBLOBs" extends="BaseResultMap" >
+    <result column="exp" property="exp" jdbcType="LONGVARCHAR" />
+    <result column="params" property="params" jdbcType="LONGVARCHAR" />
+    <result column="param_names" property="paramNames" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, model_id, pre_id, next_id, line_type, create_date, update_date
+  </sql>
+  <sql id="Blob_Column_List" >
+    exp, params, param_names
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.engine.model.ModelNextLineListExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from model_next_line_list
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.engine.model.ModelNextLineListExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from model_next_line_list
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from model_next_line_list
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from model_next_line_list
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.engine.model.ModelNextLineListExample" >
+    delete from model_next_line_list
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.engine.model.ModelNextLineListWithBLOBs" >
+    insert into model_next_line_list (id, model_id, pre_id, 
+      next_id, line_type, create_date, 
+      update_date, exp, params, 
+      param_names)
+    values (#{id,jdbcType=VARCHAR}, #{modelId,jdbcType=VARCHAR}, #{preId,jdbcType=VARCHAR}, 
+      #{nextId,jdbcType=VARCHAR}, #{lineType,jdbcType=INTEGER}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{updateDate,jdbcType=TIMESTAMP}, #{exp,jdbcType=LONGVARCHAR}, #{params,jdbcType=LONGVARCHAR}, 
+      #{paramNames,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.engine.model.ModelNextLineListWithBLOBs" >
+    insert into model_next_line_list
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="modelId != null" >
+        model_id,
+      </if>
+      <if test="preId != null" >
+        pre_id,
+      </if>
+      <if test="nextId != null" >
+        next_id,
+      </if>
+      <if test="lineType != null" >
+        line_type,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
+      </if>
+      <if test="exp != null" >
+        exp,
+      </if>
+      <if test="params != null" >
+        params,
+      </if>
+      <if test="paramNames != null" >
+        param_names,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="modelId != null" >
+        #{modelId,jdbcType=VARCHAR},
+      </if>
+      <if test="preId != null" >
+        #{preId,jdbcType=VARCHAR},
+      </if>
+      <if test="nextId != null" >
+        #{nextId,jdbcType=VARCHAR},
+      </if>
+      <if test="lineType != null" >
+        #{lineType,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="exp != null" >
+        #{exp,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="params != null" >
+        #{params,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="paramNames != null" >
+        #{paramNames,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.engine.model.ModelNextLineListExample" resultType="java.lang.Integer" >
+    select count(*) from model_next_line_list
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update model_next_line_list
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.modelId != null" >
+        model_id = #{record.modelId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.preId != null" >
+        pre_id = #{record.preId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nextId != null" >
+        next_id = #{record.nextId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lineType != null" >
+        line_type = #{record.lineType,jdbcType=INTEGER},
+      </if>
+      <if test="record.createDate != null" >
+        create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateDate != null" >
+        update_date = #{record.updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.exp != null" >
+        exp = #{record.exp,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.params != null" >
+        params = #{record.params,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.paramNames != null" >
+        param_names = #{record.paramNames,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update model_next_line_list
+    set id = #{record.id,jdbcType=VARCHAR},
+      model_id = #{record.modelId,jdbcType=VARCHAR},
+      pre_id = #{record.preId,jdbcType=VARCHAR},
+      next_id = #{record.nextId,jdbcType=VARCHAR},
+      line_type = #{record.lineType,jdbcType=INTEGER},
+      create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      update_date = #{record.updateDate,jdbcType=TIMESTAMP},
+      exp = #{record.exp,jdbcType=LONGVARCHAR},
+      params = #{record.params,jdbcType=LONGVARCHAR},
+      param_names = #{record.paramNames,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update model_next_line_list
+    set id = #{record.id,jdbcType=VARCHAR},
+      model_id = #{record.modelId,jdbcType=VARCHAR},
+      pre_id = #{record.preId,jdbcType=VARCHAR},
+      next_id = #{record.nextId,jdbcType=VARCHAR},
+      line_type = #{record.lineType,jdbcType=INTEGER},
+      create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      update_date = #{record.updateDate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.engine.model.ModelNextLineListWithBLOBs" >
+    update model_next_line_list
+    <set >
+      <if test="modelId != null" >
+        model_id = #{modelId,jdbcType=VARCHAR},
+      </if>
+      <if test="preId != null" >
+        pre_id = #{preId,jdbcType=VARCHAR},
+      </if>
+      <if test="nextId != null" >
+        next_id = #{nextId,jdbcType=VARCHAR},
+      </if>
+      <if test="lineType != null" >
+        line_type = #{lineType,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="exp != null" >
+        exp = #{exp,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="params != null" >
+        params = #{params,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="paramNames != null" >
+        param_names = #{paramNames,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.engine.model.ModelNextLineListWithBLOBs" >
+    update model_next_line_list
+    set model_id = #{modelId,jdbcType=VARCHAR},
+      pre_id = #{preId,jdbcType=VARCHAR},
+      next_id = #{nextId,jdbcType=VARCHAR},
+      line_type = #{lineType,jdbcType=INTEGER},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      exp = #{exp,jdbcType=LONGVARCHAR},
+      params = #{params,jdbcType=LONGVARCHAR},
+      param_names = #{paramNames,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.engine.model.ModelNextLineList" >
+    update model_next_line_list
+    set model_id = #{modelId,jdbcType=VARCHAR},
+      pre_id = #{preId,jdbcType=VARCHAR},
+      next_id = #{nextId,jdbcType=VARCHAR},
+      line_type = #{lineType,jdbcType=INTEGER},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_date = #{updateDate,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,37 @@
+
+<?xml version="1.0" encoding="UTF-8"?>
+<riskmodel id="3">
+
+    <orders>
+        <!--年龄限制 男性 21-60 周岁    女性 21-55周岁  -->
+        <item name="Age"   desc="年龄限制"  id="1"  order="1" refuse="true" points="0" refuseReason="43" >
+            <exp><![CDATA[ if(( UcBasicInfo_gender == 1 &&  (UcBasicInfo_age < 21 ||  UcBasicInfo_age > 60))
+                || ( UcBasicInfo_gender == 2 &&  (UcBasicInfo_age < 21 ||  UcBasicInfo_age > 55) ))
+                { return true ; } else {return false ;}]]></exp>
+            <params>UcBasicInfo_age,UcBasicInfo_gender</params>
+            <paramNames>UcBasicInfo_age=年龄,UcBasicInfo_gender=性别</paramNames>
+        </item>
+    </orders>
+
+    <decisions>
+        <!--性别 -->
+        <group name="genderGroup"   desc="性别"  gid="1" start="true" points="0" >
+            <item name="male"   desc="男"  id="1" points="11.17" falsecontinue="continue" truecontinue="break" parentfalsecontinue="continue"  start="true">
+                <exp>if(UcBasicInfo_gender == 1 ) {return true;} else {return false ;} </exp>
+                <params>UcBasicInfo_gender</params>
+                <next id="2" >
+                    <exp><![CDATA[ return true; ]]></exp>
+                    <params>UcBasicInfo_gender</params>
+                </next>
+            </item>
+            <item name="female"   desc="女"  id="2" points="80.64" falsecontinue="continue" truecontinue="break" parentfalsecontinue="continue"  start="true">
+                <exp>if(UcBasicInfo_gender != 1 ) {return true;} else {return false ;} </exp>
+                <params>UcBasicInfo_gender</params>
+            </item>
+            <next id="2" >
+                <exp><![CDATA[ return true; ]]> </exp>
+                <params>UcBasicInfo_gender</params>
+            </next>
+        </group>
+    </decisions>
+</riskmodel>

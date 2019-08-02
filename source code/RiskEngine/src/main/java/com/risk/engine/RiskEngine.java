@@ -7,7 +7,7 @@ import java.util.Map.Entry;
 
 import com.engine.config.CommConst;
 import com.engine.data.ReflexParams;
-import com.engine.util.LoginHelper;
+import com.engine.util.LoggerHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.CollectionUtils;
@@ -53,7 +53,7 @@ public class RiskEngine {
             return execute(id, params);
         } catch (IllegalArgumentException | IllegalAccessException e) {
             String msg = ExceptionUtils.getStackTrace(e);
-            LoginHelper.error(logger, msg);
+            LoggerHelper.error(logger, msg);
             throw e;
         }
     }
@@ -74,7 +74,7 @@ public class RiskEngine {
             params = getParamsByListParams(listParams, paramRef);
             return execute(modelId, params);
         } catch (Exception e) {
-            LoginHelper.error(logger, ExceptionUtils.getStackTrace(e));
+            LoggerHelper.error(logger, ExceptionUtils.getStackTrace(e));
             throw e;
         }
     }
@@ -532,7 +532,7 @@ public class RiskEngine {
                         CommConst.BASE_DATA_PACKAGE + className, methodName, paramRef);
             } catch (Exception ex) {
                 String msg = "构造模型参数异常: 【" + param + "】反射调用异常";
-                LoginHelper.error(msg, RiskEngine.class.getName());
+                LoggerHelper.error(msg, RiskEngine.class.getName());
                 paramResult = null;
             }
             params.put(param, paramResult);
