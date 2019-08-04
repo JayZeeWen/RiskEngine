@@ -1,17 +1,4 @@
-/*
-Navicat MySQL Data Transfer
 
-Source Server         : local
-Source Server Version : 50720
-Source Host           : localhost:3306
-Source Database       : engine
-
-Target Server Type    : MYSQL
-Target Server Version : 50720
-File Encoding         : 65001
-
-Date: 2019-05-05 15:36:49
-*/
 
 SET FOREIGN_KEY_CHECKS=0;
 
@@ -56,22 +43,7 @@ CREATE TABLE `risk_model` (
 
 
 
-/*
-Navicat MySQL Data Transfer
 
-Source Server         : local
-Source Server Version : 50720
-Source Host           : localhost:3306
-Source Database       : engine
-
-Target Server Type    : MYSQL
-Target Server Version : 50720
-File Encoding         : 65001
-
-Date: 2019-08-02 11:39:48
-*/
-
-SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
 -- Table structure for model_item
@@ -105,10 +77,10 @@ CREATE TABLE `model_next_line_list` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='树节点连接表';
 
 -- ----------------------------
--- Table structure for modle_decision_group
+-- Table structure for model_decision_group
 -- ----------------------------
-DROP TABLE IF EXISTS `modle_decision_group`;
-CREATE TABLE `modle_decision_group` (
+DROP TABLE IF EXISTS `model_decision_group`;
+CREATE TABLE `model_decision_group` (
   `id` varchar(64) NOT NULL,
   `model_id` varchar(64) DEFAULT NULL,
   `model_item_id` varchar(64) DEFAULT NULL COMMENT '模型项id',
@@ -124,10 +96,10 @@ CREATE TABLE `modle_decision_group` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='模型decision组配置   对应 xml配置的 decisions -> group';
 
 -- ----------------------------
--- Table structure for modle_group_item
+-- Table structure for model_group_item
 -- ----------------------------
-DROP TABLE IF EXISTS `modle_group_item`;
-CREATE TABLE `modle_group_item` (
+DROP TABLE IF EXISTS `model_group_item`;
+CREATE TABLE `model_group_item` (
   `id` varchar(64) NOT NULL,
   `group_id` varchar(64) DEFAULT NULL COMMENT '模型orderId',
   `name` varchar(64) DEFAULT NULL COMMENT '名称',
@@ -149,10 +121,10 @@ CREATE TABLE `modle_group_item` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='模型group项配置  对应 xml配置的 decisions -> group -> item';
 
 -- ----------------------------
--- Table structure for modle_order_item
+-- Table structure for model_order_item
 -- ----------------------------
-DROP TABLE IF EXISTS `modle_order_item`;
-CREATE TABLE `modle_order_item` (
+DROP TABLE IF EXISTS `model_order_item`;
+CREATE TABLE `model_order_item` (
   `id` varchar(64) NOT NULL,
   `model_id` varchar(64) DEFAULT NULL,
   `model_item_id` varchar(64) DEFAULT NULL COMMENT '模型项id',

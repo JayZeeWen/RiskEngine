@@ -5,33 +5,33 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class ModleGroupItemExample {
+public class ModelGroupItemExample {
     /**
-     * modle_group_item
+     * model_group_item
      */
     protected String orderByClause;
 
     /**
-     * modle_group_item
+     * model_group_item
      */
     protected boolean distinct;
 
     /**
-     * modle_group_item
+     * model_group_item
      */
     protected List<Criteria> oredCriteria;
 
     /**
      *
-     * @mbggenerated 2019-08-02
+     * @mbggenerated 2019-08-04
      */
-    public ModleGroupItemExample() {
+    public ModelGroupItemExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
     /**
      *
-     * @mbggenerated 2019-08-02
+     * @mbggenerated 2019-08-04
      */
     public void setOrderByClause(String orderByClause) {
         this.orderByClause = orderByClause;
@@ -39,7 +39,7 @@ public class ModleGroupItemExample {
 
     /**
      *
-     * @mbggenerated 2019-08-02
+     * @mbggenerated 2019-08-04
      */
     public String getOrderByClause() {
         return orderByClause;
@@ -47,7 +47,7 @@ public class ModleGroupItemExample {
 
     /**
      *
-     * @mbggenerated 2019-08-02
+     * @mbggenerated 2019-08-04
      */
     public void setDistinct(boolean distinct) {
         this.distinct = distinct;
@@ -55,7 +55,7 @@ public class ModleGroupItemExample {
 
     /**
      *
-     * @mbggenerated 2019-08-02
+     * @mbggenerated 2019-08-04
      */
     public boolean isDistinct() {
         return distinct;
@@ -63,7 +63,7 @@ public class ModleGroupItemExample {
 
     /**
      *
-     * @mbggenerated 2019-08-02
+     * @mbggenerated 2019-08-04
      */
     public List<Criteria> getOredCriteria() {
         return oredCriteria;
@@ -71,7 +71,7 @@ public class ModleGroupItemExample {
 
     /**
      *
-     * @mbggenerated 2019-08-02
+     * @mbggenerated 2019-08-04
      */
     public void or(Criteria criteria) {
         oredCriteria.add(criteria);
@@ -79,7 +79,7 @@ public class ModleGroupItemExample {
 
     /**
      *
-     * @mbggenerated 2019-08-02
+     * @mbggenerated 2019-08-04
      */
     public Criteria or() {
         Criteria criteria = createCriteriaInternal();
@@ -89,7 +89,7 @@ public class ModleGroupItemExample {
 
     /**
      *
-     * @mbggenerated 2019-08-02
+     * @mbggenerated 2019-08-04
      */
     public Criteria createCriteria() {
         Criteria criteria = createCriteriaInternal();
@@ -101,7 +101,7 @@ public class ModleGroupItemExample {
 
     /**
      *
-     * @mbggenerated 2019-08-02
+     * @mbggenerated 2019-08-04
      */
     protected Criteria createCriteriaInternal() {
         Criteria criteria = new Criteria();
@@ -110,7 +110,7 @@ public class ModleGroupItemExample {
 
     /**
      *
-     * @mbggenerated 2019-08-02
+     * @mbggenerated 2019-08-04
      */
     public void clear() {
         oredCriteria.clear();
@@ -119,7 +119,7 @@ public class ModleGroupItemExample {
     }
 
     /**
-     * modle_group_item 2019-08-02
+     * model_group_item 2019-08-04
      */
     protected abstract static class GeneratedCriteria {
         protected List<Criterion> criteria;
@@ -1234,7 +1234,7 @@ public class ModleGroupItemExample {
     }
 
     /**
-     * modle_group_item
+     * model_group_item
      */
     public static class Criteria extends GeneratedCriteria {
 
@@ -1244,7 +1244,7 @@ public class ModleGroupItemExample {
     }
 
     /**
-     * modle_group_item 2019-08-02
+     * model_group_item 2019-08-04
      */
     public static class Criterion {
         private String condition;

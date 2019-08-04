@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.engine.dao.ModleDecisionGroupMapper" >
-  <resultMap id="BaseResultMap" type="com.engine.model.ModleDecisionGroup" >
+<mapper namespace="com.engine.dao.ModelDecisionGroupMapper" >
+  <resultMap id="BaseResultMap" type="com.engine.model.ModelDecisionGroup" >
     <id column="id" property="id" jdbcType="VARCHAR" />
     <result column="model_id" property="modelId" jdbcType="VARCHAR" />
     <result column="model_item_id" property="modelItemId" jdbcType="VARCHAR" />
@@ -76,13 +76,13 @@
     id, model_id, model_item_id, group_name, group_desc, group_no, is_start, tag, points, 
     create_date, update_date
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.engine.model.ModleDecisionGroupExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.engine.model.ModelDecisionGroupExample" >
     select
     <if test="distinct" >
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from modle_decision_group
+    from model_decision_group
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -93,21 +93,21 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
     <include refid="Base_Column_List" />
-    from modle_decision_group
+    from model_decision_group
     where id = #{id,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
-    delete from modle_decision_group
+    delete from model_decision_group
     where id = #{id,jdbcType=VARCHAR}
   </delete>
-  <delete id="deleteByExample" parameterType="com.engine.model.ModleDecisionGroupExample" >
-    delete from modle_decision_group
+  <delete id="deleteByExample" parameterType="com.engine.model.ModelDecisionGroupExample" >
+    delete from model_decision_group
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.engine.model.ModleDecisionGroup" >
-    insert into modle_decision_group (id, model_id, model_item_id, 
+  <insert id="insert" parameterType="com.engine.model.ModelDecisionGroup" >
+    insert into model_decision_group (id, model_id, model_item_id, 
       group_name, group_desc, group_no, 
       is_start, tag, points, create_date, 
       update_date)
@@ -116,8 +116,8 @@
       #{isStart,jdbcType=BIT}, #{tag,jdbcType=VARCHAR}, #{points,jdbcType=DECIMAL}, #{createDate,jdbcType=TIMESTAMP}, 
       #{updateDate,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.engine.model.ModleDecisionGroup" >
-    insert into modle_decision_group
+  <insert id="insertSelective" parameterType="com.engine.model.ModelDecisionGroup" >
+    insert into model_decision_group
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         id,
@@ -189,14 +189,14 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.engine.model.ModleDecisionGroupExample" resultType="java.lang.Integer" >
-    select count(*) from modle_decision_group
+  <select id="countByExample" parameterType="com.engine.model.ModelDecisionGroupExample" resultType="java.lang.Integer" >
+    select count(*) from model_decision_group
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update modle_decision_group
+    update model_decision_group
     <set >
       <if test="record.id != null" >
         id = #{record.id,jdbcType=VARCHAR},
@@ -237,7 +237,7 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update modle_decision_group
+    update model_decision_group
     set id = #{record.id,jdbcType=VARCHAR},
       model_id = #{record.modelId,jdbcType=VARCHAR},
       model_item_id = #{record.modelItemId,jdbcType=VARCHAR},
@@ -253,8 +253,8 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.engine.model.ModleDecisionGroup" >
-    update modle_decision_group
+  <update id="updateByPrimaryKeySelective" parameterType="com.engine.model.ModelDecisionGroup" >
+    update model_decision_group
     <set >
       <if test="modelId != null" >
         model_id = #{modelId,jdbcType=VARCHAR},
@@ -289,8 +289,8 @@
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.engine.model.ModleDecisionGroup" >
-    update modle_decision_group
+  <update id="updateByPrimaryKey" parameterType="com.engine.model.ModelDecisionGroup" >
+    update model_decision_group
     set model_id = #{modelId,jdbcType=VARCHAR},
       model_item_id = #{modelItemId,jdbcType=VARCHAR},
       group_name = #{groupName,jdbcType=VARCHAR},

@@ -1,25 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.engine.dao.ModleGroupItemMapper" >
-  <resultMap id="BaseResultMap" type="com.engine.model.ModleGroupItem" >
+<mapper namespace="com.engine.dao.ModelOrderItemMapper" >
+  <resultMap id="BaseResultMap" type="com.engine.model.ModelOrderItem" >
     <id column="id" property="id" jdbcType="VARCHAR" />
-    <result column="group_id" property="groupId" jdbcType="VARCHAR" />
+    <result column="model_id" property="modelId" jdbcType="VARCHAR" />
+    <result column="model_item_id" property="modelItemId" jdbcType="VARCHAR" />
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="descri" property="descri" jdbcType="VARCHAR" />
     <result column="item_no" property="itemNo" jdbcType="VARCHAR" />
     <result column="sort" property="sort" jdbcType="INTEGER" />
-    <result column="start" property="start" jdbcType="BIT" />
-    <result column="false_continue" property="falseContinue" jdbcType="VARCHAR" />
-    <result column="true_continue" property="trueContinue" jdbcType="VARCHAR" />
-    <result column="tag" property="tag" jdbcType="VARCHAR" />
-    <result column="parent_falsecontinue" property="parentFalsecontinue" jdbcType="VARCHAR" />
+    <result column="is_refuse" property="isRefuse" jdbcType="BIT" />
     <result column="points" property="points" jdbcType="DECIMAL" />
+    <result column="tag" property="tag" jdbcType="VARCHAR" />
     <result column="exp" property="exp" jdbcType="VARCHAR" />
     <result column="params" property="params" jdbcType="VARCHAR" />
     <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
     <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
   </resultMap>
-  <resultMap id="ResultMapWithBLOBs" type="com.engine.model.ModleGroupItem" extends="BaseResultMap" >
+  <resultMap id="ResultMapWithBLOBs" type="com.engine.model.ModelOrderItem" extends="BaseResultMap" >
     <result column="param_names" property="paramNames" jdbcType="LONGVARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
@@ -81,13 +79,13 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, group_id, name, descri, item_no, sort, start, false_continue, true_continue, 
-    tag, parent_falsecontinue, points, exp, params, create_date, update_date
+    id, model_id, model_item_id, name, descri, item_no, sort, is_refuse, points, tag, 
+    exp, params, create_date, update_date
   </sql>
   <sql id="Blob_Column_List" >
     param_names
   </sql>
-  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.engine.model.ModleGroupItemExample" >
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.engine.model.ModelOrderItemExample" >
     select
     <if test="distinct" >
       distinct
@@ -95,7 +93,7 @@
     <include refid="Base_Column_List" />
     ,
     <include refid="Blob_Column_List" />
-    from modle_group_item
+    from model_order_item
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -103,13 +101,13 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.engine.model.ModleGroupItemExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.engine.model.ModelOrderItemExample" >
     select
     <if test="distinct" >
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from modle_group_item
+    from model_order_item
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -122,41 +120,42 @@
     <include refid="Base_Column_List" />
     ,
     <include refid="Blob_Column_List" />
-    from modle_group_item
+    from model_order_item
     where id = #{id,jdbcType=VARCHAR}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
-    delete from modle_group_item
+    delete from model_order_item
     where id = #{id,jdbcType=VARCHAR}
   </delete>
-  <delete id="deleteByExample" parameterType="com.engine.model.ModleGroupItemExample" >
-    delete from modle_group_item
+  <delete id="deleteByExample" parameterType="com.engine.model.ModelOrderItemExample" >
+    delete from model_order_item
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.engine.model.ModleGroupItem" >
-    insert into modle_group_item (id, group_id, name, 
-      descri, item_no, sort, 
-      start, false_continue, true_continue, 
-      tag, parent_falsecontinue, points, 
-      exp, params, create_date, 
+  <insert id="insert" parameterType="com.engine.model.ModelOrderItem" >
+    insert into model_order_item (id, model_id, model_item_id, 
+      name, descri, item_no, 
+      sort, is_refuse, points, 
+      tag, exp, params, create_date, 
       update_date, param_names)
-    values (#{id,jdbcType=VARCHAR}, #{groupId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
-      #{descri,jdbcType=VARCHAR}, #{itemNo,jdbcType=VARCHAR}, #{sort,jdbcType=INTEGER}, 
-      #{start,jdbcType=BIT}, #{falseContinue,jdbcType=VARCHAR}, #{trueContinue,jdbcType=VARCHAR}, 
-      #{tag,jdbcType=VARCHAR}, #{parentFalsecontinue,jdbcType=VARCHAR}, #{points,jdbcType=DECIMAL}, 
-      #{exp,jdbcType=VARCHAR}, #{params,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+    values (#{id,jdbcType=VARCHAR}, #{modelId,jdbcType=VARCHAR}, #{modelItemId,jdbcType=VARCHAR}, 
+      #{name,jdbcType=VARCHAR}, #{descri,jdbcType=VARCHAR}, #{itemNo,jdbcType=VARCHAR}, 
+      #{sort,jdbcType=INTEGER}, #{isRefuse,jdbcType=BIT}, #{points,jdbcType=DECIMAL}, 
+      #{tag,jdbcType=VARCHAR}, #{exp,jdbcType=VARCHAR}, #{params,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
       #{updateDate,jdbcType=TIMESTAMP}, #{paramNames,jdbcType=LONGVARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.engine.model.ModleGroupItem" >
-    insert into modle_group_item
+  <insert id="insertSelective" parameterType="com.engine.model.ModelOrderItem" >
+    insert into model_order_item
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         id,
       </if>
-      <if test="groupId != null" >
-        group_id,
+      <if test="modelId != null" >
+        model_id,
+      </if>
+      <if test="modelItemId != null" >
+        model_item_id,
       </if>
       <if test="name != null" >
         name,
@@ -170,23 +169,14 @@
       <if test="sort != null" >
         sort,
       </if>
-      <if test="start != null" >
-        start,
-      </if>
-      <if test="falseContinue != null" >
-        false_continue,
-      </if>
-      <if test="trueContinue != null" >
-        true_continue,
-      </if>
-      <if test="tag != null" >
-        tag,
-      </if>
-      <if test="parentFalsecontinue != null" >
-        parent_falsecontinue,
+      <if test="isRefuse != null" >
+        is_refuse,
       </if>
       <if test="points != null" >
         points,
+      </if>
+      <if test="tag != null" >
+        tag,
       </if>
       <if test="exp != null" >
         exp,
@@ -208,8 +198,11 @@
       <if test="id != null" >
         #{id,jdbcType=VARCHAR},
       </if>
-      <if test="groupId != null" >
-        #{groupId,jdbcType=VARCHAR},
+      <if test="modelId != null" >
+        #{modelId,jdbcType=VARCHAR},
+      </if>
+      <if test="modelItemId != null" >
+        #{modelItemId,jdbcType=VARCHAR},
       </if>
       <if test="name != null" >
         #{name,jdbcType=VARCHAR},
@@ -223,23 +216,14 @@
       <if test="sort != null" >
         #{sort,jdbcType=INTEGER},
       </if>
-      <if test="start != null" >
-        #{start,jdbcType=BIT},
-      </if>
-      <if test="falseContinue != null" >
-        #{falseContinue,jdbcType=VARCHAR},
-      </if>
-      <if test="trueContinue != null" >
-        #{trueContinue,jdbcType=VARCHAR},
-      </if>
-      <if test="tag != null" >
-        #{tag,jdbcType=VARCHAR},
-      </if>
-      <if test="parentFalsecontinue != null" >
-        #{parentFalsecontinue,jdbcType=VARCHAR},
+      <if test="isRefuse != null" >
+        #{isRefuse,jdbcType=BIT},
       </if>
       <if test="points != null" >
         #{points,jdbcType=DECIMAL},
+      </if>
+      <if test="tag != null" >
+        #{tag,jdbcType=VARCHAR},
       </if>
       <if test="exp != null" >
         #{exp,jdbcType=VARCHAR},
@@ -258,20 +242,23 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.engine.model.ModleGroupItemExample" resultType="java.lang.Integer" >
-    select count(*) from modle_group_item
+  <select id="countByExample" parameterType="com.engine.model.ModelOrderItemExample" resultType="java.lang.Integer" >
+    select count(*) from model_order_item
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update modle_group_item
+    update model_order_item
     <set >
       <if test="record.id != null" >
         id = #{record.id,jdbcType=VARCHAR},
       </if>
-      <if test="record.groupId != null" >
-        group_id = #{record.groupId,jdbcType=VARCHAR},
+      <if test="record.modelId != null" >
+        model_id = #{record.modelId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.modelItemId != null" >
+        model_item_id = #{record.modelItemId,jdbcType=VARCHAR},
       </if>
       <if test="record.name != null" >
         name = #{record.name,jdbcType=VARCHAR},
@@ -285,23 +272,14 @@
       <if test="record.sort != null" >
         sort = #{record.sort,jdbcType=INTEGER},
       </if>
-      <if test="record.start != null" >
-        start = #{record.start,jdbcType=BIT},
-      </if>
-      <if test="record.falseContinue != null" >
-        false_continue = #{record.falseContinue,jdbcType=VARCHAR},
-      </if>
-      <if test="record.trueContinue != null" >
-        true_continue = #{record.trueContinue,jdbcType=VARCHAR},
-      </if>
-      <if test="record.tag != null" >
-        tag = #{record.tag,jdbcType=VARCHAR},
-      </if>
-      <if test="record.parentFalsecontinue != null" >
-        parent_falsecontinue = #{record.parentFalsecontinue,jdbcType=VARCHAR},
+      <if test="record.isRefuse != null" >
+        is_refuse = #{record.isRefuse,jdbcType=BIT},
       </if>
       <if test="record.points != null" >
         points = #{record.points,jdbcType=DECIMAL},
+      </if>
+      <if test="record.tag != null" >
+        tag = #{record.tag,jdbcType=VARCHAR},
       </if>
       <if test="record.exp != null" >
         exp = #{record.exp,jdbcType=VARCHAR},
@@ -324,19 +302,17 @@
     </if>
   </update>
   <update id="updateByExampleWithBLOBs" parameterType="map" >
-    update modle_group_item
+    update model_order_item
     set id = #{record.id,jdbcType=VARCHAR},
-      group_id = #{record.groupId,jdbcType=VARCHAR},
+      model_id = #{record.modelId,jdbcType=VARCHAR},
+      model_item_id = #{record.modelItemId,jdbcType=VARCHAR},
       name = #{record.name,jdbcType=VARCHAR},
       descri = #{record.descri,jdbcType=VARCHAR},
       item_no = #{record.itemNo,jdbcType=VARCHAR},
       sort = #{record.sort,jdbcType=INTEGER},
-      start = #{record.start,jdbcType=BIT},
-      false_continue = #{record.falseContinue,jdbcType=VARCHAR},
-      true_continue = #{record.trueContinue,jdbcType=VARCHAR},
-      tag = #{record.tag,jdbcType=VARCHAR},
-      parent_falsecontinue = #{record.parentFalsecontinue,jdbcType=VARCHAR},
+      is_refuse = #{record.isRefuse,jdbcType=BIT},
       points = #{record.points,jdbcType=DECIMAL},
+      tag = #{record.tag,jdbcType=VARCHAR},
       exp = #{record.exp,jdbcType=VARCHAR},
       params = #{record.params,jdbcType=VARCHAR},
       create_date = #{record.createDate,jdbcType=TIMESTAMP},
@@ -347,19 +323,17 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update modle_group_item
+    update model_order_item
     set id = #{record.id,jdbcType=VARCHAR},
-      group_id = #{record.groupId,jdbcType=VARCHAR},
+      model_id = #{record.modelId,jdbcType=VARCHAR},
+      model_item_id = #{record.modelItemId,jdbcType=VARCHAR},
       name = #{record.name,jdbcType=VARCHAR},
       descri = #{record.descri,jdbcType=VARCHAR},
       item_no = #{record.itemNo,jdbcType=VARCHAR},
       sort = #{record.sort,jdbcType=INTEGER},
-      start = #{record.start,jdbcType=BIT},
-      false_continue = #{record.falseContinue,jdbcType=VARCHAR},
-      true_continue = #{record.trueContinue,jdbcType=VARCHAR},
-      tag = #{record.tag,jdbcType=VARCHAR},
-      parent_falsecontinue = #{record.parentFalsecontinue,jdbcType=VARCHAR},
+      is_refuse = #{record.isRefuse,jdbcType=BIT},
       points = #{record.points,jdbcType=DECIMAL},
+      tag = #{record.tag,jdbcType=VARCHAR},
       exp = #{record.exp,jdbcType=VARCHAR},
       params = #{record.params,jdbcType=VARCHAR},
       create_date = #{record.createDate,jdbcType=TIMESTAMP},
@@ -368,11 +342,14 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.engine.model.ModleGroupItem" >
-    update modle_group_item
+  <update id="updateByPrimaryKeySelective" parameterType="com.engine.model.ModelOrderItem" >
+    update model_order_item
     <set >
-      <if test="groupId != null" >
-        group_id = #{groupId,jdbcType=VARCHAR},
+      <if test="modelId != null" >
+        model_id = #{modelId,jdbcType=VARCHAR},
+      </if>
+      <if test="modelItemId != null" >
+        model_item_id = #{modelItemId,jdbcType=VARCHAR},
       </if>
       <if test="name != null" >
         name = #{name,jdbcType=VARCHAR},
@@ -386,23 +363,14 @@
       <if test="sort != null" >
         sort = #{sort,jdbcType=INTEGER},
       </if>
-      <if test="start != null" >
-        start = #{start,jdbcType=BIT},
-      </if>
-      <if test="falseContinue != null" >
-        false_continue = #{falseContinue,jdbcType=VARCHAR},
-      </if>
-      <if test="trueContinue != null" >
-        true_continue = #{trueContinue,jdbcType=VARCHAR},
-      </if>
-      <if test="tag != null" >
-        tag = #{tag,jdbcType=VARCHAR},
-      </if>
-      <if test="parentFalsecontinue != null" >
-        parent_falsecontinue = #{parentFalsecontinue,jdbcType=VARCHAR},
+      <if test="isRefuse != null" >
+        is_refuse = #{isRefuse,jdbcType=BIT},
       </if>
       <if test="points != null" >
         points = #{points,jdbcType=DECIMAL},
+      </if>
+      <if test="tag != null" >
+        tag = #{tag,jdbcType=VARCHAR},
       </if>
       <if test="exp != null" >
         exp = #{exp,jdbcType=VARCHAR},
@@ -422,19 +390,17 @@
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.engine.model.ModleGroupItem" >
-    update modle_group_item
-    set group_id = #{groupId,jdbcType=VARCHAR},
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.engine.model.ModelOrderItem" >
+    update model_order_item
+    set model_id = #{modelId,jdbcType=VARCHAR},
+      model_item_id = #{modelItemId,jdbcType=VARCHAR},
       name = #{name,jdbcType=VARCHAR},
       descri = #{descri,jdbcType=VARCHAR},
       item_no = #{itemNo,jdbcType=VARCHAR},
       sort = #{sort,jdbcType=INTEGER},
-      start = #{start,jdbcType=BIT},
-      false_continue = #{falseContinue,jdbcType=VARCHAR},
-      true_continue = #{trueContinue,jdbcType=VARCHAR},
-      tag = #{tag,jdbcType=VARCHAR},
-      parent_falsecontinue = #{parentFalsecontinue,jdbcType=VARCHAR},
+      is_refuse = #{isRefuse,jdbcType=BIT},
       points = #{points,jdbcType=DECIMAL},
+      tag = #{tag,jdbcType=VARCHAR},
       exp = #{exp,jdbcType=VARCHAR},
       params = #{params,jdbcType=VARCHAR},
       create_date = #{createDate,jdbcType=TIMESTAMP},
@@ -442,19 +408,17 @@
       param_names = #{paramNames,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.engine.model.ModleGroupItem" >
-    update modle_group_item
-    set group_id = #{groupId,jdbcType=VARCHAR},
+  <update id="updateByPrimaryKey" parameterType="com.engine.model.ModelOrderItem" >
+    update model_order_item
+    set model_id = #{modelId,jdbcType=VARCHAR},
+      model_item_id = #{modelItemId,jdbcType=VARCHAR},
       name = #{name,jdbcType=VARCHAR},
       descri = #{descri,jdbcType=VARCHAR},
       item_no = #{itemNo,jdbcType=VARCHAR},
       sort = #{sort,jdbcType=INTEGER},
-      start = #{start,jdbcType=BIT},
-      false_continue = #{falseContinue,jdbcType=VARCHAR},
-      true_continue = #{trueContinue,jdbcType=VARCHAR},
-      tag = #{tag,jdbcType=VARCHAR},
-      parent_falsecontinue = #{parentFalsecontinue,jdbcType=VARCHAR},
+      is_refuse = #{isRefuse,jdbcType=BIT},
       points = #{points,jdbcType=DECIMAL},
+      tag = #{tag,jdbcType=VARCHAR},
       exp = #{exp,jdbcType=VARCHAR},
       params = #{params,jdbcType=VARCHAR},
       create_date = #{createDate,jdbcType=TIMESTAMP},
