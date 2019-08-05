@@ -1,4 +1,15 @@
-package com.engine.controller;
+package com.engine;
+
+import com.engine.controller.testController;
+import com.engine.util.StringUtil;
+import com.engine.util.VelocityUtil;
+import com.risk.engine.RiskEngine;
+import com.risk.engine.entity.*;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -6,37 +17,21 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.engine.data.ReflexParams;
-import com.engine.util.VelocityUtil;
-import com.risk.engine.entity.*;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-
-import com.engine.model.ModelResultHitItemExt;
-import com.engine.service.ModelResultHitItemService;
-import com.engine.service.RiskResultService;
-import com.engine.util.StringUtil;
-import com.risk.engine.RiskEngine;
-
-
-@Controller
-@RequestMapping("/test")
-public class testController {
+@RunWith(SpringRunner.class)
+@SpringBootTest
+public class TestApplicationTests {
 
 	@Autowired
-	private RiskResultService riskResultService;
-	
-	@Autowired
-	private ModelResultHitItemService resultHitItemService;
+	private VelocityUtil velocityUtils;
 
-	@Autowired
-	private  VelocityUtil velocityUtils;
-	
-	@ResponseBody
-	@RequestMapping(value = "/testEngine")
-    public String  testRiskEngine() {
+	@Test
+	public void contextLoads() {
+
+	}
+
+	@Test
+	public void testRiskEngine(){
+
 		RiskParam param = new RiskParam();
 		param.setSingle5yearOverCount(20);
 		String modelId = "9";
@@ -44,59 +39,14 @@ public class testController {
 			//执行模型并得到结果
 			Result r =  RiskEngine.execute(modelId, param);
 			System.out.println(r.getMessages());
-			
-			//结果存表
-			//riskResultService.insertResultHitItem(r.getHitItems(), StringUtil.makeUUID(), modelId);
 		} catch (Exception e) {
 			System.out.println(e);
 		}
-		
-        return "succ";
-    }
-
-	@ResponseBody
-	@RequestMapping(value = "/testRiskEngineWithRef")
-    public String testRiskEngineWithRef(){
-
-		String modelId = "3";
-		Map<String,Object> params = new HashMap<>();
-		try {
-			ReflexParams p = new ReflexParams();
-			p.setUserId("3332");
-			p.setOrderId("sdf");
-
-			//执行模型并得到结果
-			Result r =  RiskEngine.executeWithReflex(modelId,p);
-			System.out.println(r.getMessages());
-
-		} catch (Exception e) {
-			System.out.println(e);
-		}
-		return  "Succ";
-
 	}
-	
-	/**
-	 * 获取 命中的规则详情
-	 * @param resultId
-	 * @return
-	 */
-	@ResponseBody
-	@RequestMapping(value = "/getResultDetail")
-    public String  getResultDetail(String resultId) {
-		//根据模型结果 获取 命中的规则详情
-		List<ModelResultHitItemExt> list = resultHitItemService.getHitItemExtByResultId(resultId);
-        return "succ";
-    }
 
-	/**
-	 * 测试生成模型xml
-	 * @return
-	 */
-	@ResponseBody
-	@RequestMapping(value = "/testVeclo")
+	@Test
+	public void testGenerateModel(){
 
-	public String  testVeclo() {
 		RiskModelTemplate template  = new RiskModelTemplate();
 		List<String> listPara = new ArrayList<>();
 		List<String> listP = new ArrayList<>();
@@ -133,7 +83,7 @@ public class testController {
 
 		Next iNext = new Next();
 
-		iNext.setId("1");
+		iNext.setId("2");
 		iNext.setExpression("return true;");
 		iNext.setParamNames(listPara);
 		listINext.add(iNext);
@@ -173,13 +123,12 @@ public class testController {
 		template.setDecisions(listGroups);
 
 
-		String result = "<html><body><div>";
+		String result = "";
 		result += velocityUtils.generateRiskModelByTemp(template);
-		result += "</div></body></html>";
-		return result;
+
+		System.out.println(result);
+
+
 	}
 
-
-
-	
 }

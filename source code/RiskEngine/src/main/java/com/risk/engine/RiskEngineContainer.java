@@ -58,12 +58,13 @@ public class RiskEngineContainer {
 				RiskModelTemplate riskModel = handleRiskModel(model);
 				if(null != riskModel){
 					riskModelMap.put(riskModel.getId(), riskModel);
+					logger.info("===================初始化模型【"+ riskModel.getModelName() +"】成功========================");
 				}
 			}
 		}else{
 			logger.info("===================未找到激活的风控模型========================");
 		}
-		
+		logger.info("===================初始化了 "+ riskModelMap.size() +" 个模型========================");
 		logger.info("===================风控模型初始化结束========================");
 	}
 	

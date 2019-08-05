@@ -6,134 +6,131 @@ import java.util.List;
 
 /**
  * item配置类型定义
- * @author JayZee 文
  *
+ * @author JayZee 文
  */
 public class Item {
-	
-	private String name;
-	
-	private String desc;
-	
-	private String id;
-	
-	private int order;
-	
-	private boolean refuse;
-	
-	private boolean refuseBreak;
-	
-	private BigDecimal points;
-	
-	private String expression;
-	
-	private List<String> paramNames;
-	
-	private String refuseReason;
-	
-	private String paramDescs;
-	
-	private String tag;
 
-	public String getId() {
-		return id;
-	}
+    private String name;
 
-	public void setId(String id) {
-		this.id = id;
-	}
+    private String desc;
 
-	public int getOrder() {
-		return order;
-	}
+    private String id;
 
-	public void setOrder(int order) {
-		this.order = order;
-	}
+    private int order;
 
-	public boolean isRefuse() {
-		return refuse;
-	}
+    private boolean refuse;
 
-	public void setRefuse(boolean refuse) {
-		this.refuse = refuse;
-	}
+    private boolean refuseBreak;
 
-	public BigDecimal getPoints() {
-		return points;
-	}
+    private BigDecimal points;
 
-	public void setPoints(BigDecimal points) {
-		this.points = points;
-	}
+    private String expression;
 
-	public String getExpression() {
-		return expression;
-	}
+    private List<String> paramNames;
 
-	public void setExpression(String expression) {
-		this.expression = expression;
-	}
+    private String refuseReason;
 
-	public String getName() {
-		return name;
-	}
+    private String paramDescs;
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    private String tag;
 
-	public String getDesc() {
-		return desc;
-	}
+    public String getId() {
+        return id;
+    }
 
-	public void setDesc(String desc) {
-		this.desc = desc;
-	}
+    public void setId(String id) {
+        this.id = id;
+    }
 
-	public List<String> getParamNames() {
-		return paramNames;
-	}
+    public int getOrder() {
+        return order;
+    }
 
-	public void setParamNames(List<String> paramNames) {
-		this.paramNames = paramNames;
-	}
+    public void setOrder(int order) {
+        this.order = order;
+    }
 
-	public String getRefuseReason() {
-		return refuseReason;
-	}
+    public boolean isRefuse() {
+        return refuse;
+    }
 
-	public void setRefuseReason(String refuseReason) {
-		this.refuseReason = refuseReason;
-	}
+    public void setRefuse(boolean refuse) {
+        this.refuse = refuse;
+    }
 
-	public String getParamDescs() {
-		return paramDescs;
-	}
+    public BigDecimal getPoints() {
+        return points;
+    }
 
-	public void setParamDescs(String paramDescs) {
-		this.paramDescs = paramDescs;
-	}
+    public void setPoints(BigDecimal points) {
+        this.points = points;
+    }
 
-	public boolean isRefuseBreak() {
-		return refuseBreak;
-	}
+    public String getExpression() {
+        return expression;
+    }
 
-	public void setRefuseBreak(boolean refuseBreak) {
-		this.refuseBreak = refuseBreak;
-	}
+    public void setExpression(String expression) {
+        this.expression = expression;
+    }
 
-	public String getTag() {
-		return tag;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public void setTag(String tag) {
-		this.tag = tag;
-	}
-	
-	
-	
-	
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDesc() {
+        return desc;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
+    }
+
+    public List<String> getParamNames() {
+        return paramNames;
+    }
+
+    public void setParamNames(List<String> paramNames) {
+        this.paramNames = paramNames;
+    }
+
+    public String getRefuseReason() {
+        return refuseReason;
+    }
+
+    public void setRefuseReason(String refuseReason) {
+        this.refuseReason = refuseReason;
+    }
+
+    public String getParamDescs() {
+        return paramDescs;
+    }
+
+    public void setParamDescs(String paramDescs) {
+        this.paramDescs = paramDescs;
+    }
+
+    public boolean isRefuseBreak() {
+        return refuseBreak;
+    }
+
+    public void setRefuseBreak(boolean refuseBreak) {
+        this.refuseBreak = refuseBreak;
+    }
+
+    public String getTag() {
+        return tag;
+    }
+
+    public void setTag(String tag) {
+        this.tag = tag;
+    }
+
 
 }
 

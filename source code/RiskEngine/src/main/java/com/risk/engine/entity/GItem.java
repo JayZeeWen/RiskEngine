@@ -19,8 +19,6 @@ public class GItem {
 	//private String toid;
 	
 	private String turecontinue;
-	
-	
 
 	private String falsecontinue;
 	
