@@ -1,6 +1,7 @@
 package com.engine;
 
 import com.engine.controller.testController;
+import com.engine.service.GenModelConfigService;
 import com.engine.util.StringUtil;
 import com.engine.util.VelocityUtil;
 import com.risk.engine.RiskEngine;
@@ -23,6 +24,9 @@ public class TestApplicationTests {
 
 	@Autowired
 	private VelocityUtil velocityUtils;
+
+	@Autowired
+	private GenModelConfigService genModelConfigService;
 
 	@Test
 	public void contextLoads() {
@@ -52,8 +56,9 @@ public class TestApplicationTests {
 		List<String> listP = new ArrayList<>();
 
 		template.setId("9");
-		List<Item> listOrder = new ArrayList<Item>();
 
+		// mode.orders
+		List<Item> listOrder = new ArrayList<Item>();
 		listPara.add("UcBasicInfo_age");
 		listPara.add("UcBasicInfo_gender");
 		Item order = new Item();
@@ -69,7 +74,6 @@ public class TestApplicationTests {
 				"                            { return true ; } else {return false ;}");
 		order.setParamNames(listPara);
 		order.setParamDescs("UcBasicInfo_age=年龄,UcBasicInfo_gender=性别");
-
 		listOrder.add(order);
 		template.setOrders(listOrder);
 
@@ -78,57 +82,54 @@ public class TestApplicationTests {
 		List<Next> listINext = new ArrayList<>();
 		List<Next> listGNext = new ArrayList<>();
 
-
-
-
+		//mode.group.item.next
 		Next iNext = new Next();
-
 		iNext.setId("2");
 		iNext.setExpression("return true;");
-		iNext.setParamNames(listPara);
+		iNext.setParamNames(listPara);//group.item.next.para
 		listINext.add(iNext);
 
+		//model.group.item
 		GItem item = new GItem();
-
 		listP.add("UcBasicInfo_gender");
 		item.setId("1");
 		item.setDesc("男");
 		item.setName("male");
 		item.setPoints(new BigDecimal(String.valueOf("11.17")));
-
 		item.setStart(true);
 		item.setTurecontinue(EngineConstant.Break);
 		item.setFalsecontinue(EngineConstant.Continue);
 		item.setParentfalsecontinue(EngineConstant.Continue);
 		item.setExpression("if(UcBasicInfo_gender == 1 ) {return true;} else {return false ;} ");
-		item.setParamNames(listP);
-		item.setNextList(listINext);
+		item.setParamNames(listP);//group.item.para
+		item.setNextList(listINext);//group.item.next
 		listItem.add(item);
 
+		//model.group.next
 		Next gNext = new Next();
 		gNext.setId("2");
 		gNext.setExpression("return true;");
-		gNext.setParamNames(listP);
+		gNext.setParamNames(listP);//group.next.para
 		listGNext.add(gNext);
 
+		// model.decisions.group
 		Group group = new Group();
 		group.setGid("99");
 		group.setName("genderGroup");
 		group.setDesc("性别");
 		group.setPoints(new BigDecimal(0));
 		group.setStart(true);
-		group.setItems(listItem);
-		group.setNextList(listGNext);
+		group.setItems(listItem); //group.item
+		group.setNextList(listGNext);//group.next
 		listGroups.put("1",group);
-		template.setDecisions(listGroups);
-
+		template.setDecisions(listGroups);//group
 
 		String result = "";
-		result += velocityUtils.generateRiskModelByTemp(template);
+		result += genModelConfigService.generateRiskModelByTemp(template);
 
 		System.out.println(result);
-
-
 	}
+
+
 
 }

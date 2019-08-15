@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Map;
 
 import com.engine.data.ReflexParams;
+import com.engine.service.GenModelConfigService;
+import com.engine.service.ModelDBService;
 import com.engine.util.VelocityUtil;
 import com.risk.engine.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +35,12 @@ public class testController {
 
 	@Autowired
 	private  VelocityUtil velocityUtils;
+
+	@Autowired
+	private GenModelConfigService genModelConfigService;
+
+	@Autowired
+	private ModelDBService modelDBService;
 	
 	@ResponseBody
 	@RequestMapping(value = "/testEngine")
@@ -86,6 +94,8 @@ public class testController {
     public String  getResultDetail(String resultId) {
 		//根据模型结果 获取 命中的规则详情
 		List<ModelResultHitItemExt> list = resultHitItemService.getHitItemExtByResultId(resultId);
+		modelDBService.getByModelId("9");
+
         return "succ";
     }
 
@@ -174,7 +184,7 @@ public class testController {
 
 
 		String result = "<html><body><div>";
-		result += velocityUtils.generateRiskModelByTemp(template);
+		result += genModelConfigService.generateRiskModelByTemp(template);
 		result += "</div></body></html>";
 		return result;
 	}

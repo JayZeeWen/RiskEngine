@@ -24,6 +24,7 @@ public class VelocityUtil {
     @Value("${spring.velocity.resource-loader-path}")
     private String templatePath;
 
+    // 测试类
     public static void velocityClassLoadExample() {
         // 创建引擎
         VelocityEngine ve=new VelocityEngine();
@@ -50,12 +51,14 @@ public class VelocityUtil {
         }
     }
 
+
     /**
-     * 通过模板 生成模型xml
-     * @param template 模板类
-     * @return 模板xml
+     * 通过模板 生成 文本内容
+     * @param context 内容参数
+     * @param templateName 模板名称
+     * @return 生成文本
      */
-    public String generateRiskModelByTemp(RiskModelTemplate template){
+    public String generateByContext(VelocityContext context,String templateName){
         String result = "";
         VelocityEngine ve=new VelocityEngine();
         //设置模板加载路径，这里设置的是class下
@@ -64,18 +67,9 @@ public class VelocityUtil {
         try {
             ve.init();
             //加载模板，设定模板编码
-            Template t=ve.getTemplate(templatePath + "/RiskModelTemplate.vm","utf-8");
+            Template t=ve.getTemplate(templatePath + "/"+ templateName +".vm","utf-8");
             StringWriter writer = new StringWriter();
-
             //模板参数
-            List<Group> listGroups = new ArrayList<>();
-            for(Map.Entry<String,Group> e : template.getDecisions().entrySet()){
-                Group g =  e.getValue();
-                listGroups.add(g);
-            }
-            VelocityContext context = new VelocityContext();
-            context.put("riskModel",template);
-            context.put("listGroup",listGroups);
             t.merge(context, writer);
             result  = writer.toString();
         } catch (Exception e) {
