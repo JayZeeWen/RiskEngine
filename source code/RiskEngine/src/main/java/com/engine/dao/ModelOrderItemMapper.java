@@ -2,91 +2,92 @@ package com.engine.dao;
 
 import com.engine.model.ModelOrderItem;
 import com.engine.model.ModelOrderItemExample;
+import com.engine.model.ModelOrderItemWithBLOBs;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface ModelOrderItemMapper {
     /**
      *
-     * @mbggenerated 2019-08-04
+     * @mbggenerated 2019-08-15
      */
     int countByExample(ModelOrderItemExample example);
 
     /**
      *
-     * @mbggenerated 2019-08-04
+     * @mbggenerated 2019-08-15
      */
     int deleteByExample(ModelOrderItemExample example);
 
     /**
      *
-     * @mbggenerated 2019-08-04
+     * @mbggenerated 2019-08-15
      */
     int deleteByPrimaryKey(String id);
 
     /**
      *
-     * @mbggenerated 2019-08-04
+     * @mbggenerated 2019-08-15
      */
-    int insert(ModelOrderItem record);
+    int insert(ModelOrderItemWithBLOBs record);
 
     /**
      *
-     * @mbggenerated 2019-08-04
+     * @mbggenerated 2019-08-15
      */
-    int insertSelective(ModelOrderItem record);
+    int insertSelective(ModelOrderItemWithBLOBs record);
 
     /**
      *
-     * @mbggenerated 2019-08-04
+     * @mbggenerated 2019-08-15
      */
-    List<ModelOrderItem> selectByExampleWithBLOBs(ModelOrderItemExample example);
+    List<ModelOrderItemWithBLOBs> selectByExampleWithBLOBs(ModelOrderItemExample example);
 
     /**
      *
-     * @mbggenerated 2019-08-04
+     * @mbggenerated 2019-08-15
      */
     List<ModelOrderItem> selectByExample(ModelOrderItemExample example);
 
     /**
      *
-     * @mbggenerated 2019-08-04
+     * @mbggenerated 2019-08-15
      */
-    ModelOrderItem selectByPrimaryKey(String id);
+    ModelOrderItemWithBLOBs selectByPrimaryKey(String id);
 
     /**
      *
-     * @mbggenerated 2019-08-04
+     * @mbggenerated 2019-08-15
      */
-    int updateByExampleSelective(@Param("record") ModelOrderItem record, @Param("example") ModelOrderItemExample example);
+    int updateByExampleSelective(@Param("record") ModelOrderItemWithBLOBs record, @Param("example") ModelOrderItemExample example);
 
     /**
      *
-     * @mbggenerated 2019-08-04
+     * @mbggenerated 2019-08-15
      */
-    int updateByExampleWithBLOBs(@Param("record") ModelOrderItem record, @Param("example") ModelOrderItemExample example);
+    int updateByExampleWithBLOBs(@Param("record") ModelOrderItemWithBLOBs record, @Param("example") ModelOrderItemExample example);
 
     /**
      *
-     * @mbggenerated 2019-08-04
+     * @mbggenerated 2019-08-15
      */
     int updateByExample(@Param("record") ModelOrderItem record, @Param("example") ModelOrderItemExample example);
 
     /**
      *
-     * @mbggenerated 2019-08-04
+     * @mbggenerated 2019-08-15
      */
-    int updateByPrimaryKeySelective(ModelOrderItem record);
+    int updateByPrimaryKeySelective(ModelOrderItemWithBLOBs record);
 
     /**
      *
-     * @mbggenerated 2019-08-04
+     * @mbggenerated 2019-08-15
      */
-    int updateByPrimaryKeyWithBLOBs(ModelOrderItem record);
+    int updateByPrimaryKeyWithBLOBs(ModelOrderItemWithBLOBs record);
 
     /**
      *
-     * @mbggenerated 2019-08-04
+     * @mbggenerated 2019-08-15
      */
     int updateByPrimaryKey(ModelOrderItem record);
 }

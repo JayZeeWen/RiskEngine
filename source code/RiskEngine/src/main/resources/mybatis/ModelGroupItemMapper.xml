@@ -14,12 +14,12 @@
     <result column="tag" property="tag" jdbcType="VARCHAR" />
     <result column="parent_falsecontinue" property="parentFalsecontinue" jdbcType="VARCHAR" />
     <result column="points" property="points" jdbcType="DECIMAL" />
-    <result column="exp" property="exp" jdbcType="VARCHAR" />
     <result column="params" property="params" jdbcType="VARCHAR" />
     <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
     <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
   </resultMap>
-  <resultMap id="ResultMapWithBLOBs" type="com.engine.model.ModelGroupItem" extends="BaseResultMap" >
+  <resultMap id="ResultMapWithBLOBs" type="com.engine.model.ModelGroupItemWithBLOBs" extends="BaseResultMap" >
+    <result column="exp" property="exp" jdbcType="LONGVARCHAR" />
     <result column="param_names" property="paramNames" jdbcType="LONGVARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
@@ -82,10 +82,10 @@
   </sql>
   <sql id="Base_Column_List" >
     id, group_id, name, descri, item_no, sort, start, false_continue, true_continue, 
-    tag, parent_falsecontinue, points, exp, params, create_date, update_date
+    tag, parent_falsecontinue, points, params, create_date, update_date
   </sql>
   <sql id="Blob_Column_List" >
-    param_names
+    exp, param_names
   </sql>
   <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.engine.model.ModelGroupItemExample" >
     select
@@ -135,21 +135,21 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.engine.model.ModelGroupItem" >
+  <insert id="insert" parameterType="com.engine.model.ModelGroupItemWithBLOBs" >
     insert into model_group_item (id, group_id, name, 
       descri, item_no, sort, 
       start, false_continue, true_continue, 
       tag, parent_falsecontinue, points, 
-      exp, params, create_date, 
-      update_date, param_names)
+      params, create_date, update_date, 
+      exp, param_names)
     values (#{id,jdbcType=VARCHAR}, #{groupId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
       #{descri,jdbcType=VARCHAR}, #{itemNo,jdbcType=VARCHAR}, #{sort,jdbcType=INTEGER}, 
       #{start,jdbcType=BIT}, #{falseContinue,jdbcType=VARCHAR}, #{trueContinue,jdbcType=VARCHAR}, 
       #{tag,jdbcType=VARCHAR}, #{parentFalsecontinue,jdbcType=VARCHAR}, #{points,jdbcType=DECIMAL}, 
-      #{exp,jdbcType=VARCHAR}, #{params,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
-      #{updateDate,jdbcType=TIMESTAMP}, #{paramNames,jdbcType=LONGVARCHAR})
+      #{params,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}, 
+      #{exp,jdbcType=LONGVARCHAR}, #{paramNames,jdbcType=LONGVARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.engine.model.ModelGroupItem" >
+  <insert id="insertSelective" parameterType="com.engine.model.ModelGroupItemWithBLOBs" >
     insert into model_group_item
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -188,9 +188,6 @@
       <if test="points != null" >
         points,
       </if>
-      <if test="exp != null" >
-        exp,
-      </if>
       <if test="params != null" >
         params,
       </if>
@@ -199,6 +196,9 @@
       </if>
       <if test="updateDate != null" >
         update_date,
+      </if>
+      <if test="exp != null" >
+        exp,
       </if>
       <if test="paramNames != null" >
         param_names,
@@ -241,9 +241,6 @@
       <if test="points != null" >
         #{points,jdbcType=DECIMAL},
       </if>
-      <if test="exp != null" >
-        #{exp,jdbcType=VARCHAR},
-      </if>
       <if test="params != null" >
         #{params,jdbcType=VARCHAR},
       </if>
@@ -252,6 +249,9 @@
       </if>
       <if test="updateDate != null" >
         #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="exp != null" >
+        #{exp,jdbcType=LONGVARCHAR},
       </if>
       <if test="paramNames != null" >
         #{paramNames,jdbcType=LONGVARCHAR},
@@ -303,9 +303,6 @@
       <if test="record.points != null" >
         points = #{record.points,jdbcType=DECIMAL},
       </if>
-      <if test="record.exp != null" >
-        exp = #{record.exp,jdbcType=VARCHAR},
-      </if>
       <if test="record.params != null" >
         params = #{record.params,jdbcType=VARCHAR},
       </if>
@@ -314,6 +311,9 @@
       </if>
       <if test="record.updateDate != null" >
         update_date = #{record.updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.exp != null" >
+        exp = #{record.exp,jdbcType=LONGVARCHAR},
       </if>
       <if test="record.paramNames != null" >
         param_names = #{record.paramNames,jdbcType=LONGVARCHAR},
@@ -337,10 +337,10 @@
       tag = #{record.tag,jdbcType=VARCHAR},
       parent_falsecontinue = #{record.parentFalsecontinue,jdbcType=VARCHAR},
       points = #{record.points,jdbcType=DECIMAL},
-      exp = #{record.exp,jdbcType=VARCHAR},
       params = #{record.params,jdbcType=VARCHAR},
       create_date = #{record.createDate,jdbcType=TIMESTAMP},
       update_date = #{record.updateDate,jdbcType=TIMESTAMP},
+      exp = #{record.exp,jdbcType=LONGVARCHAR},
       param_names = #{record.paramNames,jdbcType=LONGVARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -360,7 +360,6 @@
       tag = #{record.tag,jdbcType=VARCHAR},
       parent_falsecontinue = #{record.parentFalsecontinue,jdbcType=VARCHAR},
       points = #{record.points,jdbcType=DECIMAL},
-      exp = #{record.exp,jdbcType=VARCHAR},
       params = #{record.params,jdbcType=VARCHAR},
       create_date = #{record.createDate,jdbcType=TIMESTAMP},
       update_date = #{record.updateDate,jdbcType=TIMESTAMP}
@@ -368,7 +367,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.engine.model.ModelGroupItem" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.engine.model.ModelGroupItemWithBLOBs" >
     update model_group_item
     <set >
       <if test="groupId != null" >
@@ -404,9 +403,6 @@
       <if test="points != null" >
         points = #{points,jdbcType=DECIMAL},
       </if>
-      <if test="exp != null" >
-        exp = #{exp,jdbcType=VARCHAR},
-      </if>
       <if test="params != null" >
         params = #{params,jdbcType=VARCHAR},
       </if>
@@ -416,13 +412,16 @@
       <if test="updateDate != null" >
         update_date = #{updateDate,jdbcType=TIMESTAMP},
       </if>
+      <if test="exp != null" >
+        exp = #{exp,jdbcType=LONGVARCHAR},
+      </if>
       <if test="paramNames != null" >
         param_names = #{paramNames,jdbcType=LONGVARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.engine.model.ModelGroupItem" >
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.engine.model.ModelGroupItemWithBLOBs" >
     update model_group_item
     set group_id = #{groupId,jdbcType=VARCHAR},
       name = #{name,jdbcType=VARCHAR},
@@ -435,10 +434,10 @@
       tag = #{tag,jdbcType=VARCHAR},
       parent_falsecontinue = #{parentFalsecontinue,jdbcType=VARCHAR},
       points = #{points,jdbcType=DECIMAL},
-      exp = #{exp,jdbcType=VARCHAR},
       params = #{params,jdbcType=VARCHAR},
       create_date = #{createDate,jdbcType=TIMESTAMP},
       update_date = #{updateDate,jdbcType=TIMESTAMP},
+      exp = #{exp,jdbcType=LONGVARCHAR},
       param_names = #{paramNames,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
@@ -455,7 +454,6 @@
       tag = #{tag,jdbcType=VARCHAR},
       parent_falsecontinue = #{parentFalsecontinue,jdbcType=VARCHAR},
       points = #{points,jdbcType=DECIMAL},
-      exp = #{exp,jdbcType=VARCHAR},
       params = #{params,jdbcType=VARCHAR},
       create_date = #{createDate,jdbcType=TIMESTAMP},
       update_date = #{updateDate,jdbcType=TIMESTAMP}

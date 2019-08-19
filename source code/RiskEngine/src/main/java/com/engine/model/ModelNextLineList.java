@@ -9,7 +9,7 @@ public class ModelNextLineList {
     private String id;
 
     /**
-     * 模型项id
+     * 
      */
     private String modelId;
 

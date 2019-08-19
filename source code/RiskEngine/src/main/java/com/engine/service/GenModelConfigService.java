@@ -3,10 +3,7 @@ package com.engine.service;
 import com.engine.model.*;
 import com.engine.util.StringUtil;
 import com.engine.util.VelocityUtil;
-import com.risk.engine.entity.GItem;
-import com.risk.engine.entity.Group;
-import com.risk.engine.entity.Item;
-import com.risk.engine.entity.RiskModelTemplate;
+import com.risk.engine.entity.*;
 import org.apache.velocity.VelocityContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,6 +18,9 @@ public class GenModelConfigService {
 
     @Autowired
     private VelocityUtil velocityUtil;
+
+    @Autowired
+    private ModelGroupService modelGroupService;
 
     /**
      * 通过 模型模板类 生成 模型xml配置
@@ -48,8 +48,8 @@ public class GenModelConfigService {
         return  result;
     }
 
-    public String genByDBModel(RiskModel m , List<ModelOrderItem> listOrder, List<ModelDecisionGroup> listGroup,List<ModelGroupItem> listGroupItem
-            ,List<ModelNextLineList> listGroupNext,List<ModelNextLineList> listItemNext){
+    public String genByDBModel(RiskModel m , List<ModelOrderItemWithBLOBs> listOrder, List<ModelDecisionGroup> listGroup,List<ModelGroupItemWithBLOBs> listGroupItem
+            ,List<ModelNextLineListWithBLOBs> listGroupNext,List<ModelNextLineListWithBLOBs> listItemNext){
         String result = "";
         RiskModelTemplate template = dozerService.dozerMapper.map(m,RiskModelTemplate.class);
 
@@ -72,20 +72,55 @@ public class GenModelConfigService {
             for (ModelDecisionGroup group : listGroup){
                 Group modelGroup = dozerService.dozerMapper.map(group,Group.class);
 
+                //构建group.item
                 if(listGroupItem == null || listGroupItem.size() < 1 ){
                     continue;
                 }
                 List<GItem> listItems = new ArrayList<>();
-                for (ModelGroupItem item : listGroupItem){
+                for (ModelGroupItemWithBLOBs item : listGroupItem){
                     if(!item.getGroupId().equals(group.getId())){
                         continue;
                     }
                     GItem  gItem =dozerService.dozerMapper.map(item,GItem.class);
                     List<String> params = Arrays.asList(item.getParams().split(",")) ;
                     gItem.setParamNames(params);
+
+                    //构建group.item.next
+                    List<Next> listNext = new ArrayList<>();
+                    for (ModelNextLineListWithBLOBs itemNext : listItemNext){
+                        if(itemNext.getLineType() != EngineConstant.ModelNextLingType_Item){
+                            continue;
+                        }
+                        if(!itemNext.getPreId().equals(item.getId())){
+                            continue;
+                        }
+                        Next n = dozerService.dozerMapper.map(itemNext,Next.class);
+                        ModelGroupItem nextItem =  modelGroupService.getGroupItemById(itemNext.getNextId());
+                        n.setId(nextItem.getItemNo());
+                        listNext.add(n);
+                    }
+                    gItem.setNextList(listNext);
+
                     listItems.add(gItem);
                 }
                 modelGroup.setItems(listItems);
+
+                //构建group.next
+                List<Next> listNext = new ArrayList<>();
+                for (ModelNextLineList next : listGroupNext){
+                    if(next.getLineType() != EngineConstant.ModelNextLingType_Group){
+                        continue;
+                    }
+                    if(!next.getPreId().equals(group.getId())){
+                        continue;
+                    }
+                    Next n = dozerService.dozerMapper.map(next,Next.class);
+                    ModelDecisionGroup nextG = modelGroupService.getGroupById(next.getNextId());
+                    n.setId(nextG.getGroupNo());
+                    listNext.add(n);
+                }
+                modelGroup.setNextList(listNext);
+
                 mapDecision.put(StringUtil.makeUUID(),modelGroup);
             }
             template.setDecisions(mapDecision);

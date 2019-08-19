@@ -38,9 +38,9 @@
         <table tableName="model_result_hit_item" ></table>
         <table tableName="risk_model" ></table>
         <table tableName="uc_basic_info" ></table>
-        <table tableName="model_item" ></table>-->
+        <table tableName="model_item" ></table>
+        <table tableName="model_decision_group" ></table>-->
         <table tableName="model_next_line_list" ></table>
-        <table tableName="model_decision_group" ></table>
         <table tableName="model_group_item" ></table>
         <table tableName="model_order_item" ></table>
        

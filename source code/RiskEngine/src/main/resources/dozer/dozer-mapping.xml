@@ -18,7 +18,7 @@
 
 	<!-- ModelOrderItem and   Item   -->
 	<mapping>
-		<class-a>com.engine.model.ModelOrderItem</class-a>
+		<class-a>com.engine.model.ModelOrderItemWithBLOBs</class-a>
 		<class-b>com.risk.engine.entity.Item</class-b>
 		<field>
 			<a>itemNo</a>
@@ -86,7 +86,7 @@
 
 	<!-- ModelGroupItem and GItem -->
 	<mapping>
-		<class-a>com.engine.model.ModelGroupItem</class-a>
+		<class-a>com.engine.model.ModelGroupItemWithBLOBs</class-a>
 		<class-b>com.risk.engine.entity.GItem</class-b>
 		<field>
 			<a>name</a>
@@ -120,6 +120,24 @@
 			<a>points</a>
 			<b>points</b>
 		</field>
+		<field>
+			<a>exp</a>
+			<b>expression</b>
+		</field>
+		<field-exclude>
+			<a>paramNames</a>
+			<b>paramNames</b>
+		</field-exclude>
+	</mapping>
+
+	<!-- ModelNextLine and Next -->
+	<mapping>
+		<class-a>com.engine.model.ModelNextLineListWithBLOBs</class-a>
+		<class-b>com.risk.engine.entity.Next</class-b>
+		<field-exclude>
+			<a>nextId</a>
+			<b>id</b>
+		</field-exclude>
 		<field>
 			<a>exp</a>
 			<b>expression</b>

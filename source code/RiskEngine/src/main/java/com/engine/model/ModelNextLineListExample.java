@@ -22,7 +22,7 @@ public class ModelNextLineListExample {
 
     /**
      *
-     * @mbggenerated 2019-08-02
+     * @mbggenerated 2019-08-15
      */
     public ModelNextLineListExample() {
         oredCriteria = new ArrayList<Criteria>();
@@ -30,7 +30,7 @@ public class ModelNextLineListExample {
 
     /**
      *
-     * @mbggenerated 2019-08-02
+     * @mbggenerated 2019-08-15
      */
     public void setOrderByClause(String orderByClause) {
         this.orderByClause = orderByClause;
@@ -38,7 +38,7 @@ public class ModelNextLineListExample {
 
     /**
      *
-     * @mbggenerated 2019-08-02
+     * @mbggenerated 2019-08-15
      */
     public String getOrderByClause() {
         return orderByClause;
@@ -46,7 +46,7 @@ public class ModelNextLineListExample {
 
     /**
      *
-     * @mbggenerated 2019-08-02
+     * @mbggenerated 2019-08-15
      */
     public void setDistinct(boolean distinct) {
         this.distinct = distinct;
@@ -54,7 +54,7 @@ public class ModelNextLineListExample {
 
     /**
      *
-     * @mbggenerated 2019-08-02
+     * @mbggenerated 2019-08-15
      */
     public boolean isDistinct() {
         return distinct;
@@ -62,7 +62,7 @@ public class ModelNextLineListExample {
 
     /**
      *
-     * @mbggenerated 2019-08-02
+     * @mbggenerated 2019-08-15
      */
     public List<Criteria> getOredCriteria() {
         return oredCriteria;
@@ -70,7 +70,7 @@ public class ModelNextLineListExample {
 
     /**
      *
-     * @mbggenerated 2019-08-02
+     * @mbggenerated 2019-08-15
      */
     public void or(Criteria criteria) {
         oredCriteria.add(criteria);
@@ -78,7 +78,7 @@ public class ModelNextLineListExample {
 
     /**
      *
-     * @mbggenerated 2019-08-02
+     * @mbggenerated 2019-08-15
      */
     public Criteria or() {
         Criteria criteria = createCriteriaInternal();
@@ -88,7 +88,7 @@ public class ModelNextLineListExample {
 
     /**
      *
-     * @mbggenerated 2019-08-02
+     * @mbggenerated 2019-08-15
      */
     public Criteria createCriteria() {
         Criteria criteria = createCriteriaInternal();
@@ -100,7 +100,7 @@ public class ModelNextLineListExample {
 
     /**
      *
-     * @mbggenerated 2019-08-02
+     * @mbggenerated 2019-08-15
      */
     protected Criteria createCriteriaInternal() {
         Criteria criteria = new Criteria();
@@ -109,7 +109,7 @@ public class ModelNextLineListExample {
 
     /**
      *
-     * @mbggenerated 2019-08-02
+     * @mbggenerated 2019-08-15
      */
     public void clear() {
         oredCriteria.clear();
@@ -118,7 +118,7 @@ public class ModelNextLineListExample {
     }
 
     /**
-     * model_next_line_list 2019-08-02
+     * model_next_line_list 2019-08-15
      */
     protected abstract static class GeneratedCriteria {
         protected List<Criterion> criteria;
@@ -633,7 +633,7 @@ public class ModelNextLineListExample {
     }
 
     /**
-     * model_next_line_list 2019-08-02
+     * model_next_line_list 2019-08-15
      */
     public static class Criterion {
         private String condition;

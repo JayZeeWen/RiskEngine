@@ -12,12 +12,12 @@
     <result column="is_refuse" property="isRefuse" jdbcType="BIT" />
     <result column="points" property="points" jdbcType="DECIMAL" />
     <result column="tag" property="tag" jdbcType="VARCHAR" />
-    <result column="exp" property="exp" jdbcType="VARCHAR" />
     <result column="params" property="params" jdbcType="VARCHAR" />
     <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
     <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
   </resultMap>
-  <resultMap id="ResultMapWithBLOBs" type="com.engine.model.ModelOrderItem" extends="BaseResultMap" >
+  <resultMap id="ResultMapWithBLOBs" type="com.engine.model.ModelOrderItemWithBLOBs" extends="BaseResultMap" >
+    <result column="exp" property="exp" jdbcType="LONGVARCHAR" />
     <result column="param_names" property="paramNames" jdbcType="LONGVARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
@@ -80,10 +80,10 @@
   </sql>
   <sql id="Base_Column_List" >
     id, model_id, model_item_id, name, descri, item_no, sort, is_refuse, points, tag, 
-    exp, params, create_date, update_date
+    params, create_date, update_date
   </sql>
   <sql id="Blob_Column_List" >
-    param_names
+    exp, param_names
   </sql>
   <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.engine.model.ModelOrderItemExample" >
     select
@@ -133,19 +133,21 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.engine.model.ModelOrderItem" >
+  <insert id="insert" parameterType="com.engine.model.ModelOrderItemWithBLOBs" >
     insert into model_order_item (id, model_id, model_item_id, 
       name, descri, item_no, 
       sort, is_refuse, points, 
-      tag, exp, params, create_date, 
-      update_date, param_names)
+      tag, params, create_date, 
+      update_date, exp, param_names
+      )
     values (#{id,jdbcType=VARCHAR}, #{modelId,jdbcType=VARCHAR}, #{modelItemId,jdbcType=VARCHAR}, 
       #{name,jdbcType=VARCHAR}, #{descri,jdbcType=VARCHAR}, #{itemNo,jdbcType=VARCHAR}, 
       #{sort,jdbcType=INTEGER}, #{isRefuse,jdbcType=BIT}, #{points,jdbcType=DECIMAL}, 
-      #{tag,jdbcType=VARCHAR}, #{exp,jdbcType=VARCHAR}, #{params,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
-      #{updateDate,jdbcType=TIMESTAMP}, #{paramNames,jdbcType=LONGVARCHAR})
+      #{tag,jdbcType=VARCHAR}, #{params,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{updateDate,jdbcType=TIMESTAMP}, #{exp,jdbcType=LONGVARCHAR}, #{paramNames,jdbcType=LONGVARCHAR}
+      )
   </insert>
-  <insert id="insertSelective" parameterType="com.engine.model.ModelOrderItem" >
+  <insert id="insertSelective" parameterType="com.engine.model.ModelOrderItemWithBLOBs" >
     insert into model_order_item
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -178,9 +180,6 @@
       <if test="tag != null" >
         tag,
       </if>
-      <if test="exp != null" >
-        exp,
-      </if>
       <if test="params != null" >
         params,
       </if>
@@ -189,6 +188,9 @@
       </if>
       <if test="updateDate != null" >
         update_date,
+      </if>
+      <if test="exp != null" >
+        exp,
       </if>
       <if test="paramNames != null" >
         param_names,
@@ -225,9 +227,6 @@
       <if test="tag != null" >
         #{tag,jdbcType=VARCHAR},
       </if>
-      <if test="exp != null" >
-        #{exp,jdbcType=VARCHAR},
-      </if>
       <if test="params != null" >
         #{params,jdbcType=VARCHAR},
       </if>
@@ -236,6 +235,9 @@
       </if>
       <if test="updateDate != null" >
         #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="exp != null" >
+        #{exp,jdbcType=LONGVARCHAR},
       </if>
       <if test="paramNames != null" >
         #{paramNames,jdbcType=LONGVARCHAR},
@@ -281,9 +283,6 @@
       <if test="record.tag != null" >
         tag = #{record.tag,jdbcType=VARCHAR},
       </if>
-      <if test="record.exp != null" >
-        exp = #{record.exp,jdbcType=VARCHAR},
-      </if>
       <if test="record.params != null" >
         params = #{record.params,jdbcType=VARCHAR},
       </if>
@@ -292,6 +291,9 @@
       </if>
       <if test="record.updateDate != null" >
         update_date = #{record.updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.exp != null" >
+        exp = #{record.exp,jdbcType=LONGVARCHAR},
       </if>
       <if test="record.paramNames != null" >
         param_names = #{record.paramNames,jdbcType=LONGVARCHAR},
@@ -313,10 +315,10 @@
       is_refuse = #{record.isRefuse,jdbcType=BIT},
       points = #{record.points,jdbcType=DECIMAL},
       tag = #{record.tag,jdbcType=VARCHAR},
-      exp = #{record.exp,jdbcType=VARCHAR},
       params = #{record.params,jdbcType=VARCHAR},
       create_date = #{record.createDate,jdbcType=TIMESTAMP},
       update_date = #{record.updateDate,jdbcType=TIMESTAMP},
+      exp = #{record.exp,jdbcType=LONGVARCHAR},
       param_names = #{record.paramNames,jdbcType=LONGVARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -334,7 +336,6 @@
       is_refuse = #{record.isRefuse,jdbcType=BIT},
       points = #{record.points,jdbcType=DECIMAL},
       tag = #{record.tag,jdbcType=VARCHAR},
-      exp = #{record.exp,jdbcType=VARCHAR},
       params = #{record.params,jdbcType=VARCHAR},
       create_date = #{record.createDate,jdbcType=TIMESTAMP},
       update_date = #{record.updateDate,jdbcType=TIMESTAMP}
@@ -342,7 +343,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.engine.model.ModelOrderItem" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.engine.model.ModelOrderItemWithBLOBs" >
     update model_order_item
     <set >
       <if test="modelId != null" >
@@ -372,9 +373,6 @@
       <if test="tag != null" >
         tag = #{tag,jdbcType=VARCHAR},
       </if>
-      <if test="exp != null" >
-        exp = #{exp,jdbcType=VARCHAR},
-      </if>
       <if test="params != null" >
         params = #{params,jdbcType=VARCHAR},
       </if>
@@ -384,13 +382,16 @@
       <if test="updateDate != null" >
         update_date = #{updateDate,jdbcType=TIMESTAMP},
       </if>
+      <if test="exp != null" >
+        exp = #{exp,jdbcType=LONGVARCHAR},
+      </if>
       <if test="paramNames != null" >
         param_names = #{paramNames,jdbcType=LONGVARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.engine.model.ModelOrderItem" >
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.engine.model.ModelOrderItemWithBLOBs" >
     update model_order_item
     set model_id = #{modelId,jdbcType=VARCHAR},
       model_item_id = #{modelItemId,jdbcType=VARCHAR},
@@ -401,10 +402,10 @@
       is_refuse = #{isRefuse,jdbcType=BIT},
       points = #{points,jdbcType=DECIMAL},
       tag = #{tag,jdbcType=VARCHAR},
-      exp = #{exp,jdbcType=VARCHAR},
       params = #{params,jdbcType=VARCHAR},
       create_date = #{createDate,jdbcType=TIMESTAMP},
       update_date = #{updateDate,jdbcType=TIMESTAMP},
+      exp = #{exp,jdbcType=LONGVARCHAR},
       param_names = #{paramNames,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=VARCHAR}
   </update>
@@ -419,7 +420,6 @@
       is_refuse = #{isRefuse,jdbcType=BIT},
       points = #{points,jdbcType=DECIMAL},
       tag = #{tag,jdbcType=VARCHAR},
-      exp = #{exp,jdbcType=VARCHAR},
       params = #{params,jdbcType=VARCHAR},
       create_date = #{createDate,jdbcType=TIMESTAMP},
       update_date = #{updateDate,jdbcType=TIMESTAMP}

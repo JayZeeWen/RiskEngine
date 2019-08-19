@@ -1,9 +1,13 @@
 package com.engine;
 
+import com.engine.data.ReflexParams;
 import com.engine.model.*;
 import com.engine.service.GenModelConfigService;
 import com.engine.service.ModelDBService;
+import com.engine.service.RiskResultService;
+import com.engine.util.StringUtil;
 import com.engine.util.VelocityUtil;
+import com.risk.engine.RiskEngine;
 import com.risk.engine.entity.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -30,6 +34,9 @@ public class TestGenerate {
     @Autowired
     private ModelDBService modelDBService;
 
+    @Autowired
+    private RiskResultService riskResultService;
+
 
 
     @Test
@@ -43,10 +50,35 @@ public class TestGenerate {
     }
 
     @Test
-    public void  TestGetDBModel(){
-        modelDBService.getByModelId("9");
+    public void testRunModel(){
+
+        RiskParam param = new RiskParam();
+        param.setSingle5yearOverCount(20);
+        String modelId = "9";
+        try {
+            ReflexParams p = new ReflexParams();
+            p.setUserId("3332");
+            p.setOrderId("sdf");
+
+            //执行模型并得到结果
+            Result r =  RiskEngine.executeWithReflex(modelId,p);
+            System.out.println(r.getMessages());
+
+            //结果存表
+            riskResultService.insertResultHitItem(r.getHitItems(), StringUtil.makeUUID(), modelId);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
 
     }
+
+    @Test
+    public void  TestGetDBModel(){
+        modelDBService.getByModelId("9");
+    }
+
+
 
     @Test
     public void generaByDBModel(){
@@ -57,8 +89,8 @@ public class TestGenerate {
         m.setActive("1");
 
         //order
-        List<ModelOrderItem> listOrder = new ArrayList<>();
-        ModelOrderItem oItem = new ModelOrderItem();
+        List<ModelOrderItemWithBLOBs> listOrder = new ArrayList<>();
+        ModelOrderItemWithBLOBs oItem = new ModelOrderItemWithBLOBs();
         oItem.setItemNo("98");
         oItem.setName("age");
         oItem.setDescri("年龄限制");
@@ -87,8 +119,8 @@ public class TestGenerate {
 
 
         //group.item
-        List<ModelGroupItem> listGroupItems = new ArrayList<>();
-        ModelGroupItem gItem = new ModelGroupItem();
+        List<ModelGroupItemWithBLOBs> listGroupItems = new ArrayList<>();
+        ModelGroupItemWithBLOBs gItem = new ModelGroupItemWithBLOBs();
         gItem.setGroupId("997");
         gItem.setName("male");
         gItem.setDescri("男");
@@ -104,7 +136,7 @@ public class TestGenerate {
         gItem.setParamNames("UcBasicInfo_gender=性别");
         listGroupItems.add(gItem);
 
-        ModelGroupItem gItem2 = new ModelGroupItem();
+        ModelGroupItemWithBLOBs gItem2 = new ModelGroupItemWithBLOBs();
         gItem2.setGroupId("997");
         gItem2.setName("female");
         gItem2.setDescri("女");
@@ -143,8 +175,8 @@ public class TestGenerate {
         //group.item.next
 
 
-        List< ModelNextLineList > listGroupNext = new ArrayList<>();
-        List<ModelNextLineList> listItemNext = new ArrayList<>();
+        List< ModelNextLineListWithBLOBs > listGroupNext = new ArrayList<>();
+        List<ModelNextLineListWithBLOBs> listItemNext = new ArrayList<>();
 
         genModelConfigService.genByDBModel(m,listOrder,listGroup,listGroupItems,listGroupNext,listItemNext);
 

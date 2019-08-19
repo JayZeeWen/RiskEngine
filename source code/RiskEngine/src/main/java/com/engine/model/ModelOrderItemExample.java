@@ -23,7 +23,7 @@ public class ModelOrderItemExample {
 
     /**
      *
-     * @mbggenerated 2019-08-04
+     * @mbggenerated 2019-08-15
      */
     public ModelOrderItemExample() {
         oredCriteria = new ArrayList<Criteria>();
@@ -31,7 +31,7 @@ public class ModelOrderItemExample {
 
     /**
      *
-     * @mbggenerated 2019-08-04
+     * @mbggenerated 2019-08-15
      */
     public void setOrderByClause(String orderByClause) {
         this.orderByClause = orderByClause;
@@ -39,7 +39,7 @@ public class ModelOrderItemExample {
 
     /**
      *
-     * @mbggenerated 2019-08-04
+     * @mbggenerated 2019-08-15
      */
     public String getOrderByClause() {
         return orderByClause;
@@ -47,7 +47,7 @@ public class ModelOrderItemExample {
 
     /**
      *
-     * @mbggenerated 2019-08-04
+     * @mbggenerated 2019-08-15
      */
     public void setDistinct(boolean distinct) {
         this.distinct = distinct;
@@ -55,7 +55,7 @@ public class ModelOrderItemExample {
 
     /**
      *
-     * @mbggenerated 2019-08-04
+     * @mbggenerated 2019-08-15
      */
     public boolean isDistinct() {
         return distinct;
@@ -63,7 +63,7 @@ public class ModelOrderItemExample {
 
     /**
      *
-     * @mbggenerated 2019-08-04
+     * @mbggenerated 2019-08-15
      */
     public List<Criteria> getOredCriteria() {
         return oredCriteria;
@@ -71,7 +71,7 @@ public class ModelOrderItemExample {
 
     /**
      *
-     * @mbggenerated 2019-08-04
+     * @mbggenerated 2019-08-15
      */
     public void or(Criteria criteria) {
         oredCriteria.add(criteria);
@@ -79,7 +79,7 @@ public class ModelOrderItemExample {
 
     /**
      *
-     * @mbggenerated 2019-08-04
+     * @mbggenerated 2019-08-15
      */
     public Criteria or() {
         Criteria criteria = createCriteriaInternal();
@@ -89,7 +89,7 @@ public class ModelOrderItemExample {
 
     /**
      *
-     * @mbggenerated 2019-08-04
+     * @mbggenerated 2019-08-15
      */
     public Criteria createCriteria() {
         Criteria criteria = createCriteriaInternal();
@@ -101,7 +101,7 @@ public class ModelOrderItemExample {
 
     /**
      *
-     * @mbggenerated 2019-08-04
+     * @mbggenerated 2019-08-15
      */
     protected Criteria createCriteriaInternal() {
         Criteria criteria = new Criteria();
@@ -110,7 +110,7 @@ public class ModelOrderItemExample {
 
     /**
      *
-     * @mbggenerated 2019-08-04
+     * @mbggenerated 2019-08-15
      */
     public void clear() {
         oredCriteria.clear();
@@ -119,7 +119,7 @@ public class ModelOrderItemExample {
     }
 
     /**
-     * model_order_item 2019-08-04
+     * model_order_item 2019-08-15
      */
     protected abstract static class GeneratedCriteria {
         protected List<Criterion> criteria;
@@ -832,76 +832,6 @@ public class ModelOrderItemExample {
             return (Criteria) this;
         }
 
-        public Criteria andExpIsNull() {
-            addCriterion("exp is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andExpIsNotNull() {
-            addCriterion("exp is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andExpEqualTo(String value) {
-            addCriterion("exp =", value, "exp");
-            return (Criteria) this;
-        }
-
-        public Criteria andExpNotEqualTo(String value) {
-            addCriterion("exp <>", value, "exp");
-            return (Criteria) this;
-        }
-
-        public Criteria andExpGreaterThan(String value) {
-            addCriterion("exp >", value, "exp");
-            return (Criteria) this;
-        }
-
-        public Criteria andExpGreaterThanOrEqualTo(String value) {
-            addCriterion("exp >=", value, "exp");
-            return (Criteria) this;
-        }
-
-        public Criteria andExpLessThan(String value) {
-            addCriterion("exp <", value, "exp");
-            return (Criteria) this;
-        }
-
-        public Criteria andExpLessThanOrEqualTo(String value) {
-            addCriterion("exp <=", value, "exp");
-            return (Criteria) this;
-        }
-
-        public Criteria andExpLike(String value) {
-            addCriterion("exp like", value, "exp");
-            return (Criteria) this;
-        }
-
-        public Criteria andExpNotLike(String value) {
-            addCriterion("exp not like", value, "exp");
-            return (Criteria) this;
-        }
-
-        public Criteria andExpIn(List<String> values) {
-            addCriterion("exp in", values, "exp");
-            return (Criteria) this;
-        }
-
-        public Criteria andExpNotIn(List<String> values) {
-            addCriterion("exp not in", values, "exp");
-            return (Criteria) this;
-        }
-
-        public Criteria andExpBetween(String value1, String value2) {
-            addCriterion("exp between", value1, value2, "exp");
-            return (Criteria) this;
-        }
-
-        public Criteria andExpNotBetween(String value1, String value2) {
-            addCriterion("exp not between", value1, value2, "exp");
-            return (Criteria) this;
-        }
-
         public Criteria andParamsIsNull() {
             addCriterion("params is null");
             return (Criteria) this;
@@ -1104,7 +1034,7 @@ public class ModelOrderItemExample {
     }
 
     /**
-     * model_order_item 2019-08-04
+     * model_order_item 2019-08-15
      */
     public static class Criterion {
         private String condition;

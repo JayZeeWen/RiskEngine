@@ -5,7 +5,9 @@
     #if($riskModel.getOrders() && $riskModel.getOrders().size() >0 )
     <orders>
         ## 遍历生成 orders
-    #foreach($order in $riskModel.getOrders())<item name="$order.getName()"   desc="$order.getDesc()"  id="$order.getId()"  order="$order.getOrder()" refuse="$order.isRefuse()" points="$order.getPoints()" #if($order.getRefuseReason()) refuseReason="$order.getRefuseReason()"#end >
+    #foreach($order in $riskModel.getOrders())
+
+            <item name="$order.getName()"   desc="$order.getDesc()"  id="$order.getId()"  order="$order.getOrder()" refuse="$order.isRefuse()" points="$order.getPoints()" #if($order.getRefuseReason()) refuseReason="$order.getRefuseReason()"#end >
                 <exp><![CDATA[ $order.getExpression() ]]></exp>
                 <params>#foreach($para in $order.getParamNames())$para,#end</params>
                 <paramNames>$order.getParamDescs()</paramNames>
@@ -24,7 +26,7 @@
             #foreach($item in $group.getItems())
 
                 <item name="$item.getName()"   desc="$item.getDesc()"  id="$item.getId()" points="$item.getPoints()" falsecontinue="$item.getFalsecontinue()" truecontinue="$item.getTurecontinue()"  parentfalsecontinue="$item.getParentfalsecontinue()"  start="$item.isStart()">
-                    <exp>$item.getExpression()</exp>
+                    <exp><![CDATA[ $item.getExpression() ]]></exp>
                     <params>#foreach($para in $item.getParamNames())$para,#end</params>
                 #if($item.getNextList() &&$item.getNextList().size()>0)
                 ## 遍历生成 group.item.next

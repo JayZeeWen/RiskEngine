@@ -70,6 +70,7 @@ public class RiskEngine {
         try {
             //获取模型参数列表
             Set<String> listParams = getModleNeedParams(modelId);
+            listParams.remove("");
             //构建模型参数map
             params = getParamsByListParams(listParams, paramRef);
             return execute(modelId, params);
@@ -156,7 +157,7 @@ public class RiskEngine {
                     }
                     itemList.add(entity);
                 } catch (Exception e) {
-                    sb.append("执行异常%n");
+                    sb.append(String.format("执行异常 %n") );
                     e.printStackTrace();
                 }
             }
