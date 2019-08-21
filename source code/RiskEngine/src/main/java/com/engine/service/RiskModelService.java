@@ -1,11 +1,13 @@
 package com.engine.service;
 
+import com.engine.api.entity.GetRiskModelReq;
 import com.engine.dao.RiskModelMapper;
 import com.engine.model.RiskModel;
 import com.engine.model.RiskModelExample;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -29,5 +31,13 @@ public class RiskModelService {
             return  null;
         }
         return  list.get(0);
+    }
+
+    public List<RiskModel> getListByPara(GetRiskModelReq req){
+        List<RiskModel> list = new ArrayList<>();
+        RiskModelExample example = new RiskModelExample();
+        example.createCriteria();
+        list = riskModelMapper.selectByExample(example);
+        return  list ;
     }
 }

@@ -1,8 +1,10 @@
 package com.engine.model;
 
+import com.engine.dao.IPage;
+
 import java.util.Date;
 
-public class RiskModel {
+public class RiskModel implements IPage {
     /**
      * 主键
      */
